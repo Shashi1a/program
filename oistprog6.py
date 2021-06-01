@@ -1,3 +1,4 @@
+
 # creating a dataset for soma detection
 import numpy as np
 import pandas as pd
@@ -11,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import linear_model
 from sklearn import svm
 from scipy import *
-import os
+import os, sys
 import glob
 import csv
 import math
@@ -19,16 +20,19 @@ from datetime import datetime
 start_time = datetime.now()
 # do your work here
 
+
+
 #read image from directory
 def load_images_from_folder(folder):
     images = []
     for filename in os.listdir(folder):
         if filename.endswith(".tif"):
             img = cv2.imread(os.path.join(folder, filename))
-            plt.savefig('filename.png')
+            #plt.savefig('filename.png')
             images.append(img)
     return images
 root_folder = ''
+
 folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
 imgs = [img for folder in folders for img in load_images_from_folder(folder)]
 
@@ -39,14 +43,17 @@ def load_images(gray_folder):
         if filename.endswith(".tif"):
             img = cv2.imread(os.path.join(gray_folder, filename))
             gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            #gray_img = cv2.GaussianBlur(img, (5,5), 0)
             gray_images.append(gray_img)
     return gray_images
+
 gray_folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
+for file in gray_folders:
+    print('2=', file)
 gray_imgs = [gray_img for gray_folder in gray_folders for gray_img in load_images(gray_folder)]
 for j in range(len(gray_imgs)):
-    cv2.imwrite(f'gray/gray_{j}.tif', gray_imgs[j])
-    
+    cv2.imwrite('/flash/Terenzio/gray/gray_{j}.tif', gray_imgs[j])
+
+
 # apply SLIC and extract (approximately) the supplied number of segments
 def sp_idx(s, index=True):
     u = np.unique(s)
@@ -213,8 +220,8 @@ v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
 fdf = pd.concat(vdf).to_csv('./im_sp_data.csv', sep=',', index=False, header=True)
-'''
-#os.chdir("imgdir")
+
+os.chdir("imgdir")
 extension = 'csv'
 all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
 for j in range(len(gray_imgs)):
