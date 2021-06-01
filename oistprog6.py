@@ -211,18 +211,18 @@ for j in range(len(gray_imgs)):
                     f.append(e3)
                     print('f=',f)
             i += 1
-            print('i=', i)
+            #print('i=', i)
             p.append(mask2); q.append(cent_px)
             f1.append(f)
-            print('f1=',f1)
+            #print('f1=',f1)
         f2 = (1/len(mask2))*sum(f1)
         print('f2=', f2)
-        f3.append(f2)
-        print('f3=',f3)  
-        print('f3final=',np.shape(f3))
-        IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
+        #f3.append(f2)
+        #print('f3=',f3)  
+        #print('f3final=',np.shape(f3))
+        #IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
         print('00000000000000000000000')
-        print('IMF=', IMF)
+        #print('IMF=', IMF)
         '''    p1=[];p2=[];p3=[]
             if IMF > 40:
                 P_ST = superpixel[segVal-1]
