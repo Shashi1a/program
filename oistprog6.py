@@ -185,7 +185,6 @@ for j in range(len(gray_imgs)):
     mask2[0] =[];mask2[1] =[];mask2[2] =[];mask2[3] =[];mask2[4] =[];mask2[5] =[];mask2[6] =[];mask2[7] =[];mask2[8] =[]
     cent_px[0] =[];cent_px[1] =[];cent_px[2] =[];cent_px[3] =[];cent_px[4] =[];cent_px[5] =[];cent_px[6] =[];cent_px[7] =[];cent_px[8] =[]'''
     mask2= np.empty ((9, 13));cent_px= np.empty ((9, 1))
-    print('mask2[0]=', mask2[0])
     for segVal in np.unique(segments_slic):
         print('seVal=', segVal) 
         i = 0
@@ -196,6 +195,7 @@ for j in range(len(gray_imgs)):
             print('m-2=', a1);print('n-2=', a2)'''
             mask2[segVal-1] = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
             cent_px[segVal-1] = [gray_imgs[j][c1, c2]]
+            print('mask2[0]=', mask2[0])
             f[segVal-1] = np.empty((13,1))
             #f[0] =[];f[1] =[];f[2] =[];f[3] =[];f[4] =[];f[5] =[];f[6] =[];f[7] =[];f[8] =[]
             #print('mask2=', mask2)
