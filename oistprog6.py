@@ -207,14 +207,15 @@ for j in range(len(gray_imgs)):
                 #print('123=',abs(p_i-p_j))
                 if abs(p_i-p_j) <= 3:
                     e1 = 0
-                    f[segVal-1].append(e1)
+                    f[segVal-1]= np.append([f[segVal-1]],[e1])
+                    #f[segVal-1].append(e1)
                 if 3<abs(p_i-p_j) <= 12:
                     e2 = math.exp(abs(p_i-p_j)/3)
-                    f[segVal-1].append(e2)
+                    f[segVal-1] = np.append([f[segVal-1]],[e2])
                 if abs(p_i-p_j) > 12:
                     e3 = math.exp(4)
-                    f[segVal-1].append(e3)
-                    #print('f=',f)
+                    f[segVal-1] = np.append([f[segVal-1]],[e3])
+                    print('f=',f[segVal-1])
             i += 1
             f1[segVal-1].append(f[segVal-1])
             print('f1=',f1[segVal-1])
