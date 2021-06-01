@@ -209,12 +209,13 @@ for j in range(len(gray_imgs)):
                 if abs(p_i-p_j) > 12:
                     e3 = math.exp(4)
                     f.append(e3)
-                    print('f=',f)
+                    #print('f=',f)
             i += 1
-            #print('i=', i)
+            print('i=', i)
             p.append(mask2); q.append(cent_px)
+            print('f=',f)
             f1.append(f)
-            #print('f1=',f1)
+            print('f1=',f1)
         f2 = (1/len(mask2))*sum(f1)
         print('f2=', f2)
         #f3.append(f2)
