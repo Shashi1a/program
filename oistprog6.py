@@ -50,7 +50,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(gray_imgs[j], n_segments=10, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -73,7 +73,7 @@ im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.e
 im_area = np.empty ((0, int(a[j])));im_eccentricity = np.empty ((0, int(a[j])))
 im_gray1 = np.empty ((0, int(a[j]))); im_gray2 = np.empty ((0, int(a[j]))); im_gray_avg = np.empty ((0, int(a[j]))); im_coordinates = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(gray_imgs[j], n_segments=10, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     #print(segments_slic)
     print('j=', j)
