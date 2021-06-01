@@ -196,6 +196,7 @@ for j in range(len(gray_imgs)):
             print('m-2=', a1);print('n-2=', a2)'''
             mask2[segVal-1] = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
             cent_px[segVal-1] = [gray_imgs[j][c1, c2]]
+            f[segVal-1] = np.empty((13,1))
             #f[0] =[];f[1] =[];f[2] =[];f[3] =[];f[4] =[];f[5] =[];f[6] =[];f[7] =[];f[8] =[]
             #print('mask2=', mask2)
             #print('center_pixel=', cent_px)
@@ -215,7 +216,7 @@ for j in range(len(gray_imgs)):
                     #print('f=',f)
             i += 1
             f1[segVal-1].append(f[segVal-1])
-            #print('f1=',f1)
+            print('f1=',f1[segVal-1])
             p[segVal-1].append(mask2[segVal-1]); q[segVal-1].append(cent_px[segVal-1])
             print('length=', np.shape(p[segVal-1]))
             print('i=', i)    
