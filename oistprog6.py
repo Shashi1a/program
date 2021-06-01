@@ -212,7 +212,7 @@ for j in range(len(gray_imgs)):
         IMF = sum(f1)/(13*len(superpixel[segVal-1][0]))
         print('IMF=', IMF)
         print('00000000000000000000000')
-        p1=[];p2=[];p3=[]
+        '''p1=[];p2=[];p3=[]
         if IMF > 40:
             P_ST = superpixel[segVal-1]
             p1.append(P_ST)
@@ -226,12 +226,12 @@ for j in range(len(gray_imgs)):
         f4.append(IMF)
         print('f4=', f4)
         #f5.append(IMF); print('f5=',f5)
-        '''p_up = np.max(p3); p_fl = np.min(p3)
-        d_p = (p_up-p_fl)/len(p3)'''
+        p_up = np.max(p3); p_fl = np.min(p3)
+        d_p = (p_up-p_fl)/len(p3)
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
-    '''for j in range(1,len(p3)):
+    for j in range(1,len(p3)):
         sp_segments_slic = slic(p3[j], n_segments=10, compactness=10, sigma=1, start_label=1)
         print('*****************')
         sp_pixel_list = sp_idx(sp_segments_slic)
@@ -247,7 +247,7 @@ for j in range(len(gray_imgs)):
             print('\n')
             sp_2_pixmax = np.max(l-sp_pixmax)
             print('second number of maximum pixel are=', sp_2_pixmax) '''
-    im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
+    #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
     im_IMF = np.append([im_IMF], [f4])
     im_mask2 = np.append([im_mask2], [p]); im_cent_px = np.append([im_cent_px], [q])
     im = np.append([im], [im_no])
@@ -257,21 +257,23 @@ for j in range(len(gray_imgs)):
     sp_width = np.append([sp_width], [w]);sp_height = np.append([sp_height], [h])
     im_segments_slic.append(segments_slic)
     im_gray1 = np.append([im_gray1],[im_sp_gray1]);im_gray2 = np.append([im_gray2],[im_sp_gray1]);im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
-    im_area = np.append([im_area],[im_sp_area]);im_centroid = np.append([im_centroid],[im_sp_centroid]);im_centers = np.append([im_centers],[im_sp_centers]);im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
+    im_area = np.append([im_area],[im_sp_area])
+    #im_centroid = np.append([im_centroid],[im_sp_centroid]);im_centers = np.append([im_centers],[im_sp_centers])
+    im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
 z1 = pd.DataFrame(im_gray1).to_csv('./im_gray1.csv')
 z2 = pd.DataFrame(zip(im_x,im_y)).to_csv('./im_coordinates.csv')
-z3 = pd.DataFrame(im_centroid).to_csv('./im_centroid.csv')
+#z3 = pd.DataFrame(im_centroid).to_csv('./im_centroid.csv')
 z4 = pd.DataFrame(im_area).to_csv('./im_area.csv')
 z5 = pd.DataFrame(im_eccentricity).to_csv('./im_eccentricity.csv')
 z6 = pd.DataFrame(im_IMF).to_csv('./im_IMF.csv')
 z7 = pd.DataFrame(im_mask2).to_csv('./im_mask2.csv')
 z8 = pd.DataFrame(im_cent_px).to_csv('./im_cent_px.csv')
-z9 = pd.DataFrame(im_coordinates).to_csv('./im_coordinates.csv')
-z2 = np.column_stack([im_p1, im_p2, im_p3])
-zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
+#z9 = pd.DataFrame(im_coordinates).to_csv('./im_coordinates.csv')
+#z2 = np.column_stack([im_p1, im_p2, im_p3])
+#zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
 w = pd.DataFrame(im_gray2).to_csv('./im_gray2.csv')
 z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg.csv')
-ce = pd.DataFrame(im_centers).to_csv('./im_centers.csv')
+#ce = pd.DataFrame(im_centers).to_csv('./im_centers.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray1, im_gray2, im_gray_avg, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'graymax', 'graymin', 'grayavg', 'eccentricity'])
 vdf.append(df)
