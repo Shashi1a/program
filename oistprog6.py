@@ -209,7 +209,7 @@ v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
 fdf = pd.concat(vdf).to_csv('./im_sp_data.csv', sep=',', index=False, header=True)
-
+'''
 #os.chdir("imgdir")
 extension = 'csv'
 all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
@@ -228,6 +228,6 @@ combined_csv.to_csv('./flash/TerennzioU/img_data.csv', index=False, encoding='ut
 #df2 = df2.drop(['Type', 'Unnamed: 8', 'R', 'Confidence', 'Contrast', 'SNR', 'Type', 'img number'], axis=1)
 #L1 = df1[['X', 'Y']].apply(tuple, axis=1).tolist()
 #L2 = df2[['X', 'Y']].apply(tuple, axis=1).tolist()
-#soma = [i for i in L1 if i in L2]
+#soma = [i for i in L1 if i in L2]'''
 end_time = datetime.now()
 print('Duration: {}'.format(end_time - start_time))
