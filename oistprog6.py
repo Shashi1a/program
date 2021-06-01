@@ -178,13 +178,6 @@ for j in range(len(gray_imgs)):
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
     sp_mask2 = [];sp_cent_px = []
     f3 =[]; f4 = [];p=[];q=[]
-    '''f3[0] =[];f3[1] =[];f3[2] =[];f3[3] =[];f3[4] =[];f3[5] =[];f3[6] =[];f3[7] =[];f3[8] =[]
-    f4[0] =[];f4[1] =[];f4[2] =[];f4[3] =[];f4[4] =[];f4[5] =[];f4[6] =[];f4[7] =[];f4[8] =[]
-    p[0] =[];p[1] =[];p[2] =[];p[3] =[];p[4] =[];p[5] =[];p[6] =[];p[7] =[];p[8] =[]
-    q[0] =[];q[1] =[];q[2] =[];q[3] =[];q[4] =[];q[5] =[];q[6] =[];q[7] =[];q[8] =[]
-    mask2[0] =[];mask2[1] =[];mask2[2] =[];mask2[3] =[];mask2[4] =[];mask2[5] =[];mask2[6] =[];mask2[7] =[];mask2[8] =[]
-    cent_px[0] =[];cent_px[1] =[];cent_px[2] =[];cent_px[3] =[];cent_px[4] =[];cent_px[5] =[];cent_px[6] =[];cent_px[7] =[];cent_px[8] =[]'''
-    #mask2= np.empty ((9, 13));cent_px= np.empty ((9, 1))
     for segVal in np.unique(segments_slic):
         print('seVal=', segVal) 
         i = 0; f1 = []
@@ -211,37 +204,30 @@ for j in range(len(gray_imgs)):
                     f.append(e3)
                     #print('f=',f)
             i += 1
-            #print('i=', i)
-            #p.append(mask2); q.append(cent_px)
+            p.append(mask2); q.append(cent_px)
             f1.append(f)
+        print('i=', i)
         #print('f1=', f1)
-        print('f1final=',np.shape(f1))
-        #f2 = (1/len(mask2))*sum(f1)
-            #print('f2=', f2)
-        f2 = (1/i)*sum(f1)
-        print('f2=', f2)
-        #f3.append(f2)
-        #print('f3=',f3)  
-        #print('f3final=',np.shape(f3))
-        #IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
+        print('f1 final=', np.shape(f1))
+        IMF = sum(f1)/(13*len(superpixel[segVal-1][0]))
+        print('IMF=', IMF)
         print('00000000000000000000000')
-        #print('IMF=', IMF)
-        '''    p1=[];p2=[];p3=[]
-            if IMF > 40:
-                P_ST = superpixel[segVal-1]
-                p1.append(P_ST)
-            elif IMF < 20:
-                P_UD = superpixel[segVal-1]
-                p2.append(P_UD)
-            else:
-                P_OB = superpixel[segVal-1]
-                p3.append(P_OB)
-            print('p3=',p3)
-            f4.append(IMF)
-            print('f4=', f4)
-            #f5.append(IMF); print('f5=',f5)
-            p_up = np.max(p3); p_fl = np.min(p3)
-            d_p = (p_up-p_fl)/len(p3)'''
+        p1=[];p2=[];p3=[]
+        if IMF > 40:
+            P_ST = superpixel[segVal-1]
+            p1.append(P_ST)
+        elif IMF < 20:
+            P_UD = superpixel[segVal-1]
+            p2.append(P_UD)
+        else:
+            P_OB = superpixel[segVal-1]
+            p3.append(P_OB)
+        print('p3=',p3)
+        f4.append(IMF)
+        print('f4=', f4)
+        #f5.append(IMF); print('f5=',f5)
+        '''p_up = np.max(p3); p_fl = np.min(p3)
+        d_p = (p_up-p_fl)/len(p3)'''
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
