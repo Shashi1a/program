@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import cv2
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from skimage.segmentation import slic
 from skimage.segmentation import mark_boundaries
 from skimage import measure
@@ -18,17 +18,20 @@ import math
 from datetime import datetime
 start_time = datetime.now()
 # do your work here
+
 #read image from directory
 def load_images_from_folder(folder):
     images = []
     for filename in os.listdir(folder):
         if filename.endswith(".tif"):
             img = cv2.imread(os.path.join(folder, filename))
+            plt.savefig('filename.png')
             images.append(img)
     return images
 root_folder = ''
 folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
 imgs = [img for folder in folders for img in load_images_from_folder(folder)]
+
 #convert images to grayscale images
 def load_images(gray_folder):
     gray_images = []
@@ -43,6 +46,7 @@ gray_folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
 gray_imgs = [gray_img for gray_folder in gray_folders for gray_img in load_images(gray_folder)]
 for j in range(len(gray_imgs)):
     cv2.imwrite(f'gray/gray_{j}.tif', gray_imgs[j])
+    
 # apply SLIC and extract (approximately) the supplied number of segments
 def sp_idx(s, index=True):
     u = np.unique(s)
