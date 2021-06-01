@@ -69,13 +69,12 @@ im=np.empty((0, int(a[j])))
 im_mask2=np.empty((0, int(a[j]))); im_cent_px=np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j])))
 im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
-#im_centers = np.empty ((0, int(a[j])));im_centroid = np.empty ((0, int(a[j])))
 im_area = np.empty ((0, int(a[j])));im_eccentricity = np.empty ((0, int(a[j])))
 im_gray1 = np.empty ((0, int(a[j]))); im_gray2 = np.empty ((0, int(a[j]))); im_gray_avg = np.empty ((0, int(a[j]))); im_coordinates = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
     segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
-    #print(segments_slic)
+    print('slic segments are', segments_slic)
     print('j=', j)
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
@@ -86,69 +85,26 @@ for j in range(len(gray_imgs)):
     # in a single image 484 unique superpixels h... ab ek superpixel mn 1764  se 2065 pixels vary kar sakte h
     x=[0 for i in range(len(superpixel))]
     y=[0 for i in range(len(superpixel))] 
-    '''centers = np.array([np.mean(np.nonzero(segments_slic == i), axis=1) for i in segments_ids])
-    regions = measure.regionprops(segments_slic, intensity_image=gray_imgs[j])
-    sp_centroid = [r.centroid for r in regions]
-    centroid = np.append([centroid], [sp_centroid])
-    sp_area = [r.area for r in regions]
-    area = np.appˀ    sp_intensity = [r.mean_intensity for r in regions]
-    gray_intensity = np.append([gray_intensity], [sp_intensity])
-    graymax = np.max(gray_intensity); graymin = np.min(gray_intensity); grayavg = np.mean(gray_intensity)
-    sp_gray1 = np.append([sp_gray1],[graymax]);sp_gray2=np.append([sp_gray2],[graymin]);sp_gray_avg=np.append([sp_gray_avg],[grayavg])
-    sp_eccentricity = [r.eccentricity for r in regions]
-    eccentricity = np.append([eccentricity], [sp_eccentricity])'''
-    w = []; h = []
-    centx = []; centy = []
-    sp_x = []; sp_y = []; im_no = []
-    #coordinate_x=[]; coordinate_y=[]
-    #im_sp_centroid=[]; im_sp_centers=[]
-    im_sp_area=[]; im_sp_intensity=[]; im_sp_eccentricity=[]; im_sp_gray1=[]; im_sp_gray2=[];  im_sp_gray_avg=[]
-    #im_sp_coordinates_x=[]; im_sp_coordinates_y=[];sp_coordinates_x=[];sp_coordinates_y=[]
+    #centers = np.array([np.mean(np.nonzero(segments_slic == i), axis=1) for i in segments_ids])
+    w = []; h = []; centx = []; centy = []; sp_x = []; sp_y = []; im_no = []
+    im_sp_area = []; im_sp_intensity = []; im_sp_eccentricity = []; im_sp_gray1 = []; im_sp_gray2 = [];  im_sp_gray_avg = []
     regions = measure.regionprops(segments_slic, intensity_image=gray_imgs[j])
     for r in regions:
-        #sp_centroidx, sp_centroidy = r.centroid
         sp_area = r.area
         sp_eccentricity = r.eccentricity
         sp_mean_intensity = r.mean_intensity
         sp_max_intensity = r.max_intensity
         sp_min_intensity = r.min_intensity
-        #sp_coordinates = r.coords
-        #im_centroid = np.append([centroid], [sp_centroid])
-        #im_sp_centroid.append(zip(sp_centroidx,sp_centroidy))
-        #sp_area = [r.area for r in regions]
-        #area = np.append([area], [sp_area])
-        #im_sp_coordinates.append(sp_coordinates)
-        #print('coordinates=', np.hsplit(sp_coordinates, 2))
-        #print('coordinate is =', sp_coordinates[51])
         im_sp_area.append(sp_area)
-        # sp_eccentricity = [r.eccentricity for r in regions]
-        #eccentricity = np.append([eccentricity], [sp_eccentricity])
         im_sp_eccentricity.append(sp_eccentricity)
-        # sp_intensity = [r.mean_intensity for r in regions]
-        #gray_intensity = np.append([gray_intensity], [sp_intensity])
-        #im_sp_intensity.append(sp_intensity)
-        #graymax = np.max(sp_max_intensity); graymin = np.min(sp_min_intensity); grayavg = np.mean(sp_mean_intensity)
-        #graymax = np.max(gray_intensity); graymin = np.min(gray_intensity); grayavg = np.mean(gray_intensity)
-        #sp_gray1 = np.append([sp_gray1],[graymax]);sp_gray2=np.append([sp_gray2],[graymin]);sp_gray_avg=np.append([sp_gray_avg],[grayavg])
-        # im_sp_gray1.append(graymax);im_sp_gray2.append(graymin);im_sp_gray_avg.append(grayavg)
-        #a0 = pd.DataFrame(sp_coordinates[1:100]).to_csv('./a0.csv') 
-        #a1 = pd.DataFrame(sp_coordinates.flatten()).to_csv('./a1.csv') 
         im_sp_gray1.append(sp_max_intensity);im_sp_gray2.append(sp_min_intensity);im_sp_gray_avg.append(sp_mean_intensity)
-        #sp_coordinates_x.append(np.array_split(np.hsplit(sp_coordinates,2)[0], len(sp_coordinates))); sp_coordinates_y.append(np.array_split(np.hsplit(sp_coordinates,2)[1], len(sp_coordinates)))
-        ##sp_coordinates_x.append((np.hsplit(sp_coordinates,2)[0]).flatten()); sp_coordinates_y.append((np.hsplit(sp_coordinates,2)[1]).flatten())
-        # print('sp_coordinates x =', sp_coordinates_x);print('sp_coordinates y =', sp_coordinates_y);
-        #coordinate_x = np.concatenate(sp_coordinates_x); coordinate_y = np.concatenate(sp_coordinates_y)
-        #print('sp_coordinates x =', coordinate_x);print('sp_coordinates y =', coordinate_y)
-        #im_sp_coordinates_x.append(coordinate_x); im_sp_coordinates_y.append(coordina
-    rows=[];cols=[]
-    #making a  sliding window
-    
+    rows = []; cols = []
     for segVal in np.unique(segments_slic):  #segval is im_sp_centroid=[] 1,2,3,4,5,6,7,8,9 i.e. superpixels
         #print('segmentslic=',len(np.unique(segments_slic)))
         #print('segval=',segVal)
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
-        mask[segments_slic == segVal] = 255
-        pos = np.where(mask == 255)
+        mask[segments_slic == segVal] = 0
+        pos = np.where(mask == 0)
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
@@ -156,32 +112,28 @@ for j in range(len(gray_imgs)):
         cx = np.mean(x); cy = np.mean(y)
         width = xmax - xmin + 1;w.append(width)
         height = ymax - ymin + 1;h.append(height)
-        #x = [int(i) for i in x]; y = [int(i) for i in y]
         sp_x.append(x);sp_y.append(y)
         centx.append(cx);centy.append(cy)
         im_no.append(j)
         #centerx,centery = [np.mean(np.nonzero(segments_slic == i), axis=1) for i in segments_ids]
-        # making a  sliding window
+ # making a  sliding window
         row = np.size(superpixel[segVal-1][0])
         col =  np.size(superpixel[segVal-1][1])
-        #print('col size =', np.size(superpixel[segVal-1][1])
         rows.append(row);cols.append(col)
         #print('rows=',rows);print('cols=',cols)
-        f1=[];f3 = [];f2=[]
-        print('shape of superpixel=', np.shape(superpixel[segVal-1]))
+        f1 = [];f3 = [];f2 = []
+        #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
     sx  = pd.DataFrame(sp_x).to_csv('./xData.csv')
     sy  = pd.DataFrame(sp_y).to_csv('./yData.csv')
     bx = pd.read_csv('./xData.csv')
     #cx  = pd.DataFrame(bx.loc[6]).to_csv('./6xdata.csv')
     by = pd.read_csv('./yData.csv')
-    #cy  = pd.DataFrame(int(bx.iloc[6, rows[6]-2]),int(by.iloc[6, rows[6]-2])).to_csv('./6ydata.csv')                         #sx = b1['X'], sy = b2['Y'  
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
-    sp_mask2 = [];sp_cent_px = []
-    f3 =[]; f4 = [];p=[];q=[]
+    sp_mask2 = []; sp_cent_px = []
+    f3 =[]; f4 = []; p = []; q = []
     for segVal in np.unique(segments_slic):
         print('seVal=', segVal) 
         i = 0; f1 = []
-        #f1[0] =[];f1[1] =[];f1[2] =[];f1[3] =[];f1[4] =[];f1[5] =[];f1[6] =[];f1[7] =[];f1[8] =[]
         for a1, b1, c1, d1, e1, a2, b2, c2, d2, e2 in zip(bx.iloc[segVal-1 ,1:rows[segVal-1]].astype(int), bx.iloc[segVal-1, 2:rows[segVal-1]-1].astype(int), bx.iloc[segVal-1 ,3:rows[segVal-1]-2].astype(int), bx.iloc[segVal-1, 4:rows[segVal-1]-3].astype(int), bx.iloc[segVal-1 ,5:rows[segVal-1]-4].astype(int), by.iloc[segVal-1, 1:rows[segVal-1]].astype(int), by.iloc[segVal-1 ,2:rows[segVal-1]-1].astype(int), by.iloc[segVal-1, 3:rows[segVal-1]-2].astype(int), by.iloc[segVal-1 ,4:rows[segVal-1]-3].astype(int), by.iloc[segVal-1, 5:rows[segVal-1]-4].astype(int)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
             print('m=', c1);print('n=', c2);print('m-1=', b1);print('n-1=', b2)
