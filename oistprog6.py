@@ -57,20 +57,17 @@ def numberofsegments():
 a = numberofsegments()
 im_segments_slic = []; vdf = []
 im_superpixel = np.empty((0, int(a[j])))
-sp_gray1 = np.empty((0, int(a[j])));sp_gray2 = np.empty((0, int(a[j])));sp_gray_avg = np.empty((0, int(a[j])))
-graymin = np.empty((0, int(a[j])));graymax = np.empty((0, int(a[j])));grayavg = np.empty((0, int(a[j])))
-gray_intensity = np.empty((0, int(a[j])))
-sp_width = np.empty((0, int(a[j])));sp_height = np.empty((0, int(a[j])))
-area = np.empty((0, int(a[j])));eccentricity = np.empty((0, int(a[j])))
+#sp_gray1 = np.empty((0, int(a[j])));sp_gray2 = np.empty((0, int(a[j]))); #im_gray1 = np.empty ((0, int(a[j]))); im_gray2 = np.empty ((0, int(a[j])))
+sp_gray_avg = np.empty((0, int(a[j])))
+#graymin = np.empty((0, int(a[j])));graymax = np.empty((0, int(a[j])));grayavg = np.empty((0, int(a[j]))); gray_intensity = np.empty((0, int(a[j])))
+sp_width = np.empty((0, int(a[j]))); sp_height = np.empty((0, int(a[j])))
+area = np.empty((0, int(a[j]))); eccentricity = np.empty((0, int(a[j])))
 sp_centx = np.empty((0, int(a[j])));sp_centy = np.empty((0, int(a[j]))) #;centroid = np.empty((0, int(a[j])))
-im_x = np.empty((0, int(a[j])));im_y = np.empty((0, int(a[j])))
-sp_id = np.empty((0, int(a[j])))
-im=np.empty((0, int(a[j])))
-im_mask2=np.empty((0, int(a[j]))); im_cent_px=np.empty((0, int(a[j])))
-im_IMF = np.empty((0, int(a[j])))
+im_x = np.empty((0, int(a[j]))); im_y = np.empty((0, int(a[j])))
+sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
+im_mask2 = np.empty((0, int(a[j]))); im_cent_px = np.empty((0, int(a[j]))); im_IMF = np.empty((0, int(a[j])))
 im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
-im_area = np.empty ((0, int(a[j])));im_eccentricity = np.empty ((0, int(a[j])))
-im_gray1 = np.empty ((0, int(a[j]))); im_gray2 = np.empty ((0, int(a[j]))); im_gray_avg = np.empty ((0, int(a[j]))); im_coordinates = np.empty ((0, int(a[j])))
+im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_avg = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
     segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
@@ -87,17 +84,19 @@ for j in range(len(gray_imgs)):
     y=[0 for i in range(len(superpixel))] 
     #centers = np.array([np.mean(np.nonzero(segments_slic == i), axis=1) for i in segments_ids])
     w = []; h = []; centx = []; centy = []; sp_x = []; sp_y = []; im_no = []
-    im_sp_area = []; im_sp_intensity = []; im_sp_eccentricity = []; im_sp_gray1 = []; im_sp_gray2 = [];  im_sp_gray_avg = []
+    im_sp_area = []; im_sp_intensity = []; im_sp_eccentricity = []; im_sp_gray_avg = []
+    #im_sp_gray1 = []; im_sp_gray2 = []
     regions = measure.regionprops(segments_slic, intensity_image=gray_imgs[j])
     for r in regions:
         sp_area = r.area
         sp_eccentricity = r.eccentricity
         sp_mean_intensity = r.mean_intensity
-        sp_max_intensity = r.max_intensity
-        sp_min_intensity = r.min_intensity
+        #sp_max_intensity = r.max_intensity
+        #sp_min_intensity = r.min_intensity
         im_sp_area.append(sp_area)
         im_sp_eccentricity.append(sp_eccentricity)
-        im_sp_gray1.append(sp_max_intensity);im_sp_gray2.append(sp_min_intensity);im_sp_gray_avg.append(sp_mean_intensity)
+        #im_sp_gray1.append(sp_max_intensity);im_sp_gray2.append(sp_min_intensity)
+        im_sp_gray_avg.append(sp_mean_intensity)
     rows = []; cols = []
     for segVal in np.unique(segments_slic):  #segval is im_sp_centroid=[] 1,2,3,4,5,6,7,8,9 i.e. superpixels
         #print('segmentslic=',len(np.unique(segments_slic)))
@@ -161,7 +160,7 @@ for j in range(len(gray_imgs)):
         print('i=', i)
         #print('f1=', f1)
         print('f1 final=', np.shape(f1))
-        IMF = sum(f1)/(13*len(superpixel[segVal-1][0]))
+        IMF = np.sum(f1)/(13*len(superpixel[segVal-1][0]))
         print('IMF=', IMF)
         print('00000000000000000000000')
         '''p1=[];p2=[];p3=[]
@@ -202,17 +201,15 @@ for j in range(len(gray_imgs)):
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
     im_IMF = np.append([im_IMF], [f4])
     im_mask2 = np.append([im_mask2], [p]); im_cent_px = np.append([im_cent_px], [q])
-    im = np.append([im], [im_no])
-    sp_id = np.append([sp_id], [segments_ids])
+    im = np.append([im], [im_no]); sp_id = np.append([sp_id], [segments_ids])
     im_x = np.append([im_x], [sp_x]);im_y = np.append([im_y], [sp_y])
     sp_centx = np.append([sp_centx], [centx]);sp_centy = np.append([sp_centy], [centy])
     sp_width = np.append([sp_width], [w]);sp_height = np.append([sp_height], [h])
-    im_segments_slic.append(segments_slic)
-    im_gray1 = np.append([im_gray1],[im_sp_gray1]);im_gray2 = np.append([im_gray2],[im_sp_gray1]);im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
-    im_area = np.append([im_area],[im_sp_area])
-    #im_centroid = np.append([im_centroid],[im_sp_centroid]);im_centers = np.append([im_centers],[im_sp_centers])
+    im_segments_slic.append(segments_slic); im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
+    #im_gray1 = np.append([im_gray1],[im_sp_gray1]);im_gray2 = np.append([im_gray2],[im_sp_gray1])
+    im_area = np.append([im_area],[im_sp_area]) #im_centroid = np.append([im_centroid],[im_sp_centroid]);im_centers = np.append([im_centers],[im_sp_centers])
     im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
-z1 = pd.DataFrame(im_gray1).to_csv('./im_gray1.csv')
+#z1 = pd.DataFrame(im_gray1).to_csv('./im_gray1.csv')
 z2 = pd.DataFrame(zip(im_x,im_y)).to_csv('./im_coordinates.csv')
 #z3 = pd.DataFrame(im_centroid).to_csv('./im_centroid.csv')
 z4 = pd.DataFrame(im_area).to_csv('./im_area.csv')
@@ -223,11 +220,11 @@ z8 = pd.DataFrame(im_cent_px).to_csv('./im_cent_px.csv')
 #z9 = pd.DataFrame(im_coordinates).to_csv('./im_coordinates.csv')
 #z2 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
-w = pd.DataFrame(im_gray2).to_csv('./im_gray2.csv')
+#w = pd.DataFrame(im_gray2).to_csv('./im_gray2.csv')
 z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg.csv')
 #ce = pd.DataFrame(im_centers).to_csv('./im_centers.csv')
-v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray1, im_gray2, im_gray_avg, im_eccentricity])
-df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'graymax', 'graymin', 'grayavg', 'eccentricity'])
+v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
+df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
 #v = np.column_stack([im, sp_id,sp_centx, sp_centy, sp_width, sp_height, im_x, im_y, im_mask2, eccentricity, area, gray_intensity, sp_gray1, sp_gray2, sp_gray_avg, im_IMF])
 #df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'X', 'Y', 'Mask', 'eccentricity','area' ,'gray_intensity','graymax', 'graymin', 'grayavg','IMF'])
