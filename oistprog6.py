@@ -193,52 +193,37 @@ for j in range(len(gray_imgs)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
             print('m=', c1);print('n=', c2);print('m-1=', b1);print('n-1=', b2)
             print('m-2=', a1);print('n-2=', a2)'''
-            #mask2[segVal-1]
             mask2 = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
-            #cent_px[segVal-1]
             cent_px = [gray_imgs[j][c1, c2]]
-            #print('mask2[0]=', mask2[0])
-            #f[segVal-1] = np.empty((13,1))
+            #print('mask2=', mask2); print('center_pixel=', cent_px)
             f = []
-            #f[0] =[];f[1] =[];f[2] =[];f[3] =[];f[4] =[];f[5] =[];f[6] =[];f[7] =[];f[8] =[]
-            #print('mask2=', mask2)
-            #print('center_pixel=', cent_px)
-            #for k in range(len(mask2[segVal-1])):
             for k in range(len(mask2)):
                 #print('k=',k) 
-                #p_i = cent_px[segVal-1]; pj = mask2[segVal-1]; p_j = pj[k]
                 p_i = cent_px; pj = mask2; p_j = pj[k]
-                #print('123=',abs(p_i-p_j))
                 if abs(p_i-p_j) <= 3:
                     e1 = 0
-                    #f[segVal-1]= np.append([f[segVal-1]],[e1])
                     f.append(e1)
                 if 3<abs(p_i-p_j) <= 12:
                     e2 = math.exp(abs(p_i-p_j)/3)
-                    #f[segVal-1] = np.append([f[segVal-1]],[e2])
                     f.append(e2)
                 if abs(p_i-p_j) > 12:
                     e3 = math.exp(4)
-                    #f[segVal-1] = np.append([f[segVal-1]],[e3])
                     f.append(e3)
                     print('f=',f)
             i += 1
+            print('i=', i)
+            p.append(mask2); q.append(cent_px)
             f1.append(f)
             print('f1=',f1)
-            #p[segVal-1].append(mask2[segVal-1]); q[segVal-1].append(cent_px[segVal-1])
-            p.append(mask2); q.append(cent_px)
-            print('length=', np.shape(p))
-            print('i=', i)    
-            f2 = (1/len(mask2))*sum(f1)
-            #f2[segVal-1] = (1/len(p[segVal-1]))*sum(f1[segVal-1])
-            print('f2=', f2)
-            f3.append(f2)
-            print('f3=',f3)  
-            print('f3final=',np.shape(f3))
-            IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
-            print('00000000000000000000000')
-            print('IMF=', IMF)
-            p1=[];p2=[];p3=[]
+        f2 = (1/len(mask2))*sum(f1)
+        print('f2=', f2)
+        f3.append(f2)
+        print('f3=',f3)  
+        print('f3final=',np.shape(f3))
+        IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
+        print('00000000000000000000000')
+        print('IMF=', IMF)
+        '''    p1=[];p2=[];p3=[]
             if IMF > 40:
                 P_ST = superpixel[segVal-1]
                 p1.append(P_ST)
@@ -253,7 +238,7 @@ for j in range(len(gray_imgs)):
             print('f4=', f4)
             #f5.append(IMF); print('f5=',f5)
             p_up = np.max(p3); p_fl = np.min(p3)
-            d_p = (p_up-p_fl)/len(p3)
+            d_p = (p_up-p_fl)/len(p3)'''
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
