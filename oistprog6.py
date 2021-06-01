@@ -102,8 +102,8 @@ for j in range(len(gray_imgs)):
         #print('segmentslic=',len(np.unique(segments_slic)))
         #print('segval=',segVal)
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
-        mask[segments_slic == segVal] = 0
-        pos = np.where(mask == 255)
+        mask[segments_slic == segVal] = 255
+        pos = np.where(mask == 0)
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
