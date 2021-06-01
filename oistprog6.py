@@ -177,14 +177,14 @@ for j in range(len(gray_imgs)):
     #cy  = pd.DataFrame(int(bx.iloc[6, rows[6]-2]),int(by.iloc[6, rows[6]-2])).to_csv('./6ydata.csv')                         #sx = b1['X'], sy = b2['Y'  
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
     sp_mask2 = [];sp_cent_px = []
-    f3 =[]; f4 = [];p=[];q=[];f1=[];f2=[];f=[]
+    f3 =[]; f4 = [];p=[];q=[]
     '''f3[0] =[];f3[1] =[];f3[2] =[];f3[3] =[];f3[4] =[];f3[5] =[];f3[6] =[];f3[7] =[];f3[8] =[]
     f4[0] =[];f4[1] =[];f4[2] =[];f4[3] =[];f4[4] =[];f4[5] =[];f4[6] =[];f4[7] =[];f4[8] =[]
     p[0] =[];p[1] =[];p[2] =[];p[3] =[];p[4] =[];p[5] =[];p[6] =[];p[7] =[];p[8] =[]
     q[0] =[];q[1] =[];q[2] =[];q[3] =[];q[4] =[];q[5] =[];q[6] =[];q[7] =[];q[8] =[]
     mask2[0] =[];mask2[1] =[];mask2[2] =[];mask2[3] =[];mask2[4] =[];mask2[5] =[];mask2[6] =[];mask2[7] =[];mask2[8] =[]
     cent_px[0] =[];cent_px[1] =[];cent_px[2] =[];cent_px[3] =[];cent_px[4] =[];cent_px[5] =[];cent_px[6] =[];cent_px[7] =[];cent_px[8] =[]'''
-    mask2= np.empty ((9, 13));cent_px= np.empty ((9, 1))
+    #mask2= np.empty ((9, 13));cent_px= np.empty ((9, 1))
     for segVal in np.unique(segments_slic):
         print('seVal=', segVal) 
         i = 0
@@ -193,42 +193,49 @@ for j in range(len(gray_imgs)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
             print('m=', c1);print('n=', c2);print('m-1=', b1);print('n-1=', b2)
             print('m-2=', a1);print('n-2=', a2)'''
-            mask2[segVal-1] = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
-            cent_px[segVal-1] = [gray_imgs[j][c1, c2]]
-            print('mask2[0]=', mask2[0])
+            #mask2[segVal-1]
+            mask2 = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
+            #cent_px[segVal-1]
+            cent_px = [gray_imgs[j][c1, c2]]
+            #print('mask2[0]=', mask2[0])
             #f[segVal-1] = np.empty((13,1))
-            f = np.empty((9))
+            #f = np.empty((9))
             #f[0] =[];f[1] =[];f[2] =[];f[3] =[];f[4] =[];f[5] =[];f[6] =[];f[7] =[];f[8] =[]
             #print('mask2=', mask2)
             #print('center_pixel=', cent_px)
-            for k in range(len(mask2[segVal-1])):
+            #for k in range(len(mask2[segVal-1])):
+            for k in range(len(mask2)):
                 #print('k=',k) 
-                p_i = cent_px[segVal-1]; pj = mask2[segVal-1]; p_j = pj[k]
+                #p_i = cent_px[segVal-1]; pj = mask2[segVal-1]; p_j = pj[k]
+                p_i = cent_px; pj = mask2; p_j = pj[k]
                 #print('123=',abs(p_i-p_j))
                 if abs(p_i-p_j) <= 3:
                     e1 = 0
-                    f[segVal-1]= np.append([f[segVal-1]],[e1])
-                    #f[segVal-1].append(e1)
+                    #f[segVal-1]= np.append([f[segVal-1]],[e1])
+                    f.append(e1)
                 if 3<abs(p_i-p_j) <= 12:
                     e2 = math.exp(abs(p_i-p_j)/3)
-                    f[segVal-1] = np.append([f[segVal-1]],[e2])
+                    #f[segVal-1] = np.append([f[segVal-1]],[e2])
+                    f.append(e2)
                 if abs(p_i-p_j) > 12:
                     e3 = math.exp(4)
-                    f[segVal-1] = np.append([f[segVal-1]],[e3])
-                    print('f=',f[segVal-1])
+                    #f[segVal-1] = np.append([f[segVal-1]],[e3])
+                    f.append(e3)
+                    print('f=',f)
             i += 1
-            f1[segVal-1].append(f[segVal-1])
-            print('f1=',f1[segVal-1])
-            p[segVal-1].append(mask2[segVal-1]); q[segVal-1].append(cent_px[segVal-1])
-            print('length=', np.shape(p[segVal-1]))
+            f1.append(f)
+            print('f1=',f1)
+            #p[segVal-1].append(mask2[segVal-1]); q[segVal-1].append(cent_px[segVal-1])
+            p.append(mask2); q.append(cent_px)
+            print('length=', np.shape(p))
             print('i=', i)    
-            #f2 = (1/len(mask2))*sum(f1)
-            f2[segVal-1] = (1/len(p[segVal-1]))*sum(f1[segVal-1])
-            print('f2=', f2[segVal-1])
-            f3[segVal-1].append(f2[segVal-1])
-            print('f3',[segVal-1],'=',f3[segVal-1])  
-            print('f3final=',np.shape(f3[segVal-1]))
-            IMF = (1/len(superpixel[segVal-1][0]))*sum(f3[segVal-1])
+            f2 = (1/len(mask2))*sum(f1)
+            #f2[segVal-1] = (1/len(p[segVal-1]))*sum(f1[segVal-1])
+            print('f2=', f2)
+            f3.append(f2)
+            print('f3=',f3)  
+            print('f3final=',np.shape(f3))
+            IMF = (1/len(superpixel[segVal-1][0]))*sum(f3)
             print('00000000000000000000000')
             print('IMF=', IMF)
             p1=[];p2=[];p3=[]
