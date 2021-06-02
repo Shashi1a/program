@@ -69,7 +69,7 @@ w1 = DNA(t,x,y,z)
 w2 = sp.Matrix(w1)
 w3 = [x, y, z]#, E_0]
 w3 = np.reshape(w3, (300,))
-w3 = np.append(w3, t)
+#w3 = np.append(w3, t)
 w4 = w2.jacobian(w3)
 
 
@@ -126,10 +126,10 @@ values = {'t': t_0, 'x0': x_0[0], 'x1': x_0[1], 'x2': x_0[2], 'x3': x_0[3], 'x4'
 #w5= w4.subs(values)
 #w5= sp.Matrix(w5, dtype=np.float64)
 #w4 = sp.matrices.dense.matrix2numpy(w4, dtype=np.complex128)
-print('shape of w4=', np.shape(w4))
-w4 = np.array(w4)
-print('w4=', w4)
-print(size of w4=', np.shape(w4))
+#print('shape of w4=', np.shape(w4))
+#w4 = np.array(w4)
+#print('w4=', w4)
+#print(size of w4=', np.shape(w4))
 eigenv = la.eig(w4)
 w5 = eigenv.subs(values)
 print('eigen values in forma of variable are =', eigenv)
