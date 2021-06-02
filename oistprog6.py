@@ -167,7 +167,7 @@ for j in range(len(gray_imgs)):
         IMF = np.sum(f1)/(13*len(superpixel[segVal-1][0]))
         print('IMF=', IMF)
         print('00000000000000000000000')
-        '''p1=[];p2=[];p3=[]
+        p1=[];p2=[];p3=[]
         if IMF > 40:
             P_ST = superpixel[segVal-1]
             p1.append(P_ST)
