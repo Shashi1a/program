@@ -64,6 +64,12 @@ def DNA(t,x,y,z):
     return eq
 
 
+a1 = DNA(t,x,y,z)
+a2 = [t,x,y,z]
+a3 = a1.jacobian(a2)
+
+
+
 #Initialisation  ----------------------------------------------------
 x0 = np.zeros(100, dtype=np.complex128)
 #x0[50] = 1
