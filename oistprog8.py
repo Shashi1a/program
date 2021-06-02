@@ -83,7 +83,8 @@ for j in range(len(gray_imgs)):
     segments_ids = np.unique(segments_slic)
     print('slic segments are', segments_slic)
     print('j=', j)
-    plt.plot(mark_boundaries(imgs[j], segments_slic))
+    fig, ax = plt.subplots()
+    ax.imshow(mark_boundaries(imgs[j], segments_slic))
     plt.savefig('markimage.png')
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
@@ -112,7 +113,8 @@ for j in range(len(gray_imgs)):
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask[segments_slic == segVal] = 0
         pos = np.where(mask == 0)
-        plt.plot(gray_imgs[j][mask])
+        fig, ax = plt.subplots()
+        ax.imshow(gray_imgs[j][mask])
         plt.savefig('imgmasked.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
@@ -221,14 +223,14 @@ for j in range(len(gray_imgs)):
     IMF_min1 = np.min(im_IMF[0:483]); IMF_min2 = np.min(im_IMF[484:967])
     im_graymax1 = np.max(im_gray_avg[0:483]); im_graymax2 = np.max(im_gray_avg[0:483])
     im_graymin1 = np.min(im_gray_avg[0:483]); im_graymin2 = np.min(im_gray_avg[0:483])
-    print('imf_max1=', IMF_max1); print('imf_max2=', IMF_max2)
-    print('imf_min1=', IMF_min1); print('imf_min2=', IMF_min2)
-    print('imf_graymax1=', im_graymax1); print('imf_max2=', im_graymax2)
-    print('imf_graymin1=', im_graymin1); print('imf_graymin2=', im_graymin2)
     im_area = np.append([im_area],[im_sp_area]); im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
 z1 = pd.DataFrame(im_area).to_csv('./im_area2.csv')
 z2 = pd.DataFrame(im_eccentricity).to_csv('./im_eccentricity2.csv')
 z3 = pd.DataFrame(im_IMF).to_csv('./im_IMF2.csv')
+print('imf_max1=', IMF_max1); print('imf_max2=', IMF_max2)
+print('imf_min1=', IMF_min1); print('imf_min2=', IMF_min2)
+print('imf_graymax1=', im_graymax1); print('imf_max2=', im_graymax2)
+print('imf_graymin1=', im_graymin1); print('imf_graymin2=', im_graymin2)
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
 z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg2.csv')
