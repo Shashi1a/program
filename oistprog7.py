@@ -83,6 +83,8 @@ for j in range(len(gray_imgs)):
     segments_ids = np.unique(segments_slic)
     print('slic segments are', segments_slic)
     print('j=', j)
+    plt.plot(mark_boundaries(gray_imgs[j], segments_slic))
+    plt.savefig('markgrayimage.png')
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
     superpixel = [idx for idx in superpixel_list]
