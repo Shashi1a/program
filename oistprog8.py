@@ -110,11 +110,11 @@ for j in range(len(gray_imgs)):
     for segVal in np.unique(segments_slic):  #segval is im_sp_centroid=[] 1,2,3,4,5,6,7,8,9 i.e. superpixels
         #print('segmentslic=',len(np.unique(segments_slic)))
         #print('segval=',segVal)
-        mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
+        mask = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask[segments_slic == segVal] = 0
         pos = np.where(mask == 0)
         fig, ax = plt.subplots()
-        ax.imshow(gray_imgs[j][mask])
+        ax.imshow(imgs[j][mask])
         plt.savefig('imgmasked.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
