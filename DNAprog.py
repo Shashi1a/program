@@ -126,7 +126,7 @@ values = {'t': t_0, 'x0': x_0[0], 'x1': x_0[1], 'x2': x_0[2], 'x3': x_0[3], 'x4'
 #w5= w4.subs(values)
 #w5= sp.Matrix(w5, dtype=np.float64)
 #w4 = sp.matrices.dense.matrix2numpy(w4, dtype=np.complex128)
-print(shape of w4=', np.shape(w4))
+print('shape of w4=', np.shape(w4))
 w4 = np.array(w4)
 print('w4=', w4)
 print(size of w4=', np.shape(w4))
