@@ -65,8 +65,11 @@ def DNA(t,x,y,z):
 
 
 a1 = DNA(t,x,y,z)
-a2 = [t,x,y,z]
-a3 = a1.jacobian(a2)
+b1 = sp.Matrix(a1)
+s1 = [x, y, z]#, E_0]
+s1 = np.reshape(s1, (300,))
+s1 = np.append(s1, t)
+a3 = b1.jacobian(s1)
 
 
 
