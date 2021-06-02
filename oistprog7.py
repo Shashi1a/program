@@ -110,7 +110,7 @@ for j in range(len(gray_imgs)):
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask[segments_slic == segVal] = 255
         pos = np.where(mask == 255)
-        plt.plot(pos)
+        plt.plot(image[mask])
         plt.savefig('masked_image.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
