@@ -84,7 +84,7 @@ for j in range(len(gray_imgs)):
     print('slic segments are', segments_slic)
     print('j=', j)
     plt.plot(mark_boundaries, segments_slic)
-    plt.savefig('markimage.png)
+    plt.savefig('markimage.png')
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
     superpixel = [idx for idx in superpixel_list]
@@ -112,7 +112,7 @@ for j in range(len(gray_imgs)):
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask[segments_slic == segVal] = 0
         pos = np.where(mask == 0)
-        plt.plot(pos)
+        plt.plot(gray_imgs[j][mask])
         plt.savefig('imgmasked.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
