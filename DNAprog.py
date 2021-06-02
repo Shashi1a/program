@@ -258,6 +258,9 @@ for i in range(20):
     w5 = w4.subs(values)	
     print('new eigen value [',i,'] in forma of variable are =', eigenvalue)
     print('new eigen value [',i,'] =', w5)
+<<<<<<< HEAD
+>>>>>>> 53fdceeaec9cd11af5f1c5945d740775883bb9a0
+=======
 >>>>>>> 53fdceeaec9cd11af5f1c5945d740775883bb9a0
    
     print('****************************************************') 
