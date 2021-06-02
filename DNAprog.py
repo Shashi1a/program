@@ -128,15 +128,15 @@ values = {'t': t_0, 'x0': x_0[0], 'x1': x_0[1], 'x2': x_0[2], 'x3': x_0[3], 'x4'
 #w5= sp.Matrix(w5, dtype=np.float64)
 #w4 = sp.matrices.dense.matrix2numpy(w4, dtype=np.complex128)
 print('shape of w4=', np.shape(w4))
-w4 = np.array(w4)
+w4 = np.array(w4, dtype=np.complex128)
 print('w4=', w4)
 print('size of w4=', np.shape(w4))
 #print(size of w4=', np.shape(w4))
-
-eigenv = la.eig(w4)
-w5 = eigenv.subs(values)
-print('eigen values in forma of variable are =', eigenv)
-print('eigen value =', w5)
+w5 = w4.subs(values)
+eigenv = la.eig(w5)
+#w5 = eigenv.subs(values)
+print('value =', w5)
+print('eigen value =', eigenv)
 
 
 l1 = np.zeros((1000,100), dtype=np.complex128);m1 = np.zeros((1000,100),dtype=np.complex128);n1 = np.zeros((1000,100),dtype=np.complex128)
@@ -242,9 +242,10 @@ for i in range(20):
           'z92': n1[i, 92], 'z93': n1[i, 93], 'z94': n1[i, 94], 'z95': n1[i, 95], 'z96': n1[i, 96], 'z97': n1[i, 97],
           'z98': n1[i, 98], 'z99': n1[i, 99]}
     #w5= w4.subs(new_values)
-    w6 =  eigenv.subs(new_value)
-    #print('new eigen value [',i,'] in forma of variable are =', eigenvalue)
-    print('new eigen value [',i,'] =', w6)
+    w6 =  w4.subs(new_value)
+    print('vvalue =', w6)
+    eigen = la.eig(w6)
+    print('new eigen value [',i,'] =', eigen)
     print('****************************************************') 
     #print('l ki value are=', np.abs(l1[i+1,:]))
     #print('m ki value are=', m1[i+1,:])
