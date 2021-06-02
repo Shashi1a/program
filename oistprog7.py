@@ -107,7 +107,7 @@ for j in range(len(gray_imgs)):
         #print('segval=',segVal)
         mask = np.ones(gray_imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask[segments_slic == segVal] = 255
-        pos = np.where(mask == 0)
+        pos = np.where(mask == 255)
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
@@ -126,11 +126,11 @@ for j in range(len(gray_imgs)):
         #print('rows=',rows);print('cols=',cols)
         f1 = [];f3 = [];f2 = []
         #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
-    sx  = pd.DataFrame(sp_x).to_csv('./xData3.csv')
-    sy  = pd.DataFrame(sp_y).to_csv('./yData3.csv')
-    bx = pd.read_csv('./xData3.csv')
+    sx  = pd.DataFrame(sp_x).to_csv('./xData1.csv')
+    sy  = pd.DataFrame(sp_y).to_csv('./yData1.csv')
+    bx = pd.read_csv('./xData1.csv')
     #cx  = pd.DataFrame(bx.loc[6]).to_csv('./6xdata.csv')
-    by = pd.read_csv('./yData3.csv')
+    by = pd.read_csv('./yData1.csv')
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
     sp_mask2 = []; sp_cent_px = []
     f3 =[]; f4 = []; p = []; q = []
@@ -167,6 +167,8 @@ for j in range(len(gray_imgs)):
         IMF = np.sum(f1)/(13*len(superpixel[segVal-1][0]))
         print('IMF=', IMF)
         print('00000000000000000000000')
+        f4.append(IMF)
+        print('f4=', f4)
         '''p1=[];p2=[];p3=[]
         if IMF > 40:
             P_ST = superpixel[segVal-1]
@@ -210,16 +212,16 @@ for j in range(len(gray_imgs)):
     sp_width = np.append([sp_width], [w]);sp_height = np.append([sp_height], [h])
     im_segments_slic.append(segments_slic); im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
     im_area = np.append([im_area],[im_sp_area]); im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
-z1 = pd.DataFrame(im_area).to_csv('./im_area3.csv')
-z2 = pd.DataFrame(im_eccentricity).to_csv('./im_eccentricity3.csv')
-z3 = pd.DataFrame(im_IMF).to_csv('./im_IMF3.csv')
+z1 = pd.DataFrame(im_area).to_csv('./im_area1.csv')
+z2 = pd.DataFrame(im_eccentricity).to_csv('./im_eccentricity1.csv')
+z3 = pd.DataFrame(im_IMF).to_csv('./im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
-z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg3.csv')
+z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg1.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
-fdf = pd.concat(vdf).to_csv('./im_sp_data3.csv', sep=',', index=False, header=True)
+fdf = pd.concat(vdf).to_csv('./im_sp_data1.csv', sep=',', index=False, header=True)
 
 os.chdir("imgdir")
 extension = 'csv'
