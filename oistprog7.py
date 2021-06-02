@@ -63,7 +63,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -83,7 +83,8 @@ for j in range(len(gray_imgs)):
     segments_ids = np.unique(segments_slic)
     print('slic segments are', segments_slic)
     print('j=', j)
-    plt.plot(mark_boundaries(gray_imgs[j], segments_slic))
+    fig, ax = plt.subplots()
+    ax.imshow(mark_boundaries(imgs[j], segments_slic))
     plt.savefig('markgrayimage.png')
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
