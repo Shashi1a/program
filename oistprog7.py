@@ -79,7 +79,7 @@ sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j]))); im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
 im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_avg = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(gray_imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     print('slic segments are', segments_slic)
     print('j=', j)
