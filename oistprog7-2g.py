@@ -61,7 +61,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(imgs[j], n_segments=3000, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -76,7 +76,7 @@ sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j]))); im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
 im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_max = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(imgs[j], n_segments=3000, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     #print('slic segments are', segments_slic)
     print('j=', j)
@@ -185,28 +185,30 @@ for j in range(len(gray_imgs)):
         #print('IMF=', IMF)
         f4.append(IMF)
         #print('f4=', f4)
-        '''p1=[];p2=[];p3=[]
-        if IMF > 40:
-            P_ST = superpixel[segVal-1]
-            p1.append(P_ST)
-        elif IMF < 20:
+        p1=[];p2=[];p3=[]
+        #if IMF > 40:
+         #   P_ST = superpixel[segVal-1]
+          #  p1.append(P_ST)
+        if IMF <= 27:
             P_UD = superpixel[segVal-1]
             p2.append(P_UD)
         else:
             P_OB = superpixel[segVal-1]
             p3.append(P_OB)
-        print('p3=',p3)
-        f4.append(IMF)
-        print('f4=', f4)
-        #f5.append(IMF); print('f5=',f5)
+            f5.append(IMF)
+            #print('f5=',f5)
+        #print('p3=',p3)
         p_up = np.max(p3); p_fl = np.min(p3)
         d_p = (p_up-p_fl)/len(p3)
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
     for j in range(1,len(p3)):
-        sp_segments_slic = slic(p3[j], n_segments=10, compactness=10, sigma=1, start_label=1)
+        sp_segments_slic = slic(p3[j], n_segments=500, compactness=10, sigma=1, start_label=1)
         print('*****************')
+        fig, ax = plt.subplots()
+        ax.imshow(mark_boundaries(imgs[j], sp_segments_slic))
+        plt.savefig('/flash/TerenzioU/program/sp_mark.png')
         sp_pixel_list = sp_idx(sp_segments_slic)
         sp_pixel = [idx for idx in sp_pixel_list]
         print('so_pixel_list[',j,']=',sp_pixel_list)
@@ -219,8 +221,10 @@ for j in range(len(gray_imgs)):
             print('number of maximum pixel are=', sp_pixmax)
             print('\n')
             sp_2_pixmax = np.max(l-sp_pixmax)
-            print('second number of maximum pixel are=', sp_2_pixmax) '''
-    #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
+            print('second number of maximum pixel are=', sp_2_pixmax) 
+    #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); 
+    im_p3 = np.append([im_p3],[p3])
+    im_p1 = np.append([im_p1], [f5])
     im_IMF = np.append([im_IMF], [f4])
     IMF_max = np.max(f4);IMF_avg = np.mean(f4);IMF_min = np.min(f4)
     print('imf_max=', IMF_max);print('imf_avg=', IMF_avg);print('imf_min=', IMF_min)
@@ -235,7 +239,8 @@ z1 = pd.DataFrame(im_area).to_csv('/flash/TerenzioU/program/im_area1.csv')
 z2 = pd.DataFrame(im_eccentricity).to_csv('/flash/TerenzioU/program/im_eccentricity1.csv')
 z3 = pd.DataFrame(im_IMF).to_csv('/flash/TerenzioU/program/im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
-#zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
+z4 = pd.Dataframe(im_p1, columns=['IMF_p3']).to_csv('./IMF_p3', index=false, header=True)
+z5 = pd.Dataframe(p3, columns=['p3']).to_csv('./pixelclass', index=false, header=True)
 z = pd.DataFrame(im_gray_max).to_csv('/flash/TerenzioU/program/im_gray_max1.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_max, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
