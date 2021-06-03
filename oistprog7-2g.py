@@ -100,10 +100,10 @@ for j in range(len(gray_imgs)):
     for r in regions:
         sp_area = r.area
         sp_eccentricity = r.eccentricity
-        sp_mean_intensity = r.mean_intensity
+        sp_max_intensity = r.max_intensity
         im_sp_area.append(sp_area)
         im_sp_eccentricity.append(sp_eccentricity)
-        im_sp_gray_avg.append(sp_mean_intensity)
+        im_sp_gray_avg.append(sp_max_intensity)
     im_graymax = np.max(im_sp_gray_avg)
     im_grayavg = np.mean(im_sp_gray_avg)
     im_graymin = np.min(im_sp_gray_avg)
