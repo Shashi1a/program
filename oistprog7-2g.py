@@ -184,12 +184,6 @@ for j in range(len(gray_imgs)):
         IMF = np.sum(f1)/(13*i)
         f4.append(IMF)
         #print('f4=', f4)
-        IMF_max = np.max(f4)
-        IMF_avg = np.mean(f4)
-        IMF_min = np.min(f4)
-        print('imf_max=', IMF_max)
-        print('imf_avg=', IMF_avg)
-        print('imf_min=', IMF_min)
         '''p1=[];p2=[];p3=[]
         if IMF > 40:
             P_ST = superpixel[segVal-1]
@@ -227,6 +221,8 @@ for j in range(len(gray_imgs)):
             print('second number of maximum pixel are=', sp_2_pixmax) '''
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
     im_IMF = np.append([im_IMF], [f4])
+    IMF_max = np.max(f4);IMF_avg = np.mean(f4);IMF_min = np.min(f4)
+    print('imf_max=', IMF_max);print('imf_avg=', IMF_avg);print('imf_min=', IMF_min)
     im = np.append([im], [im_no]); sp_id = np.append([sp_id], [segments_ids])
     im_x = np.append([im_x], [sp_x]);im_y = np.append([im_y], [sp_y])
     sp_centx = np.append([sp_centx], [centx]);sp_centy = np.append([sp_centy], [centy])
