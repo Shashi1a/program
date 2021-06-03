@@ -211,5 +211,5 @@ for i in range(20):
     plt.plot(np.linspace(0, 100, 100), m1[i+1, :])
     plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
     plt.ylim(-0.1, 1)
-plt.savefig('/flash/TerenzioU/program/DNAgraph.png')
+    plt.savefig('/flash/TerenzioU/program/DNAgraph.png')
 
