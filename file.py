@@ -14,6 +14,8 @@ x = [x0, x1, x2]
 y = [y0, y1, y2]
 z = [z0, z1, z2]
 t = sp.var('t')
+x3 = x2
+print('x=',x)
 
 #defining equation as a function -----------------------------------------------------
 def DNA(t,x,y,z):
