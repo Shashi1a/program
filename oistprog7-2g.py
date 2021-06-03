@@ -61,7 +61,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(imgs[j], n_segments=1000, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -76,7 +76,7 @@ sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j]))); im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
 im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_max = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(imgs[j], n_segments=1000, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     #print('slic segments are', segments_slic)
     print('j=', j)
@@ -156,7 +156,7 @@ for j in range(len(gray_imgs)):
             print('m-2=', a1);print('n-2=', a2)'''
             mask2 = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
             cent_px = [gray_imgs[j][c1, c2]]
-            print('mask2=', mask2)
+            #print('mask2=', mask2)
             #print('center_pixel=', cent_px)
             f = []
             for k in range(len(mask2)):
@@ -175,14 +175,14 @@ for j in range(len(gray_imgs)):
             i += 1
             p.append(mask2); q.append(cent_px)
             f1.append(f)
-        print('i=', i)
+        #print('i=', i)
         #print('f1=', f1)
         #print('f1 final=', np.shape(f1))
         #IMF = np.sum(f1)/(13*len(superpixel[segVal-1][0]))
         #print('IMF=', IMF)
-        print('00000000000000000000000')
+        #print('00000000000000000000000')
         IMF = np.sum(f1)/(13*i)
-        print('IMF=', IMF)
+        #print('IMF=', IMF)
         f4.append(IMF)
         #print('f4=', f4)
         '''p1=[];p2=[];p3=[]
