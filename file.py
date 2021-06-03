@@ -61,7 +61,7 @@ def DNA(t,x,y,z):
     E3.append(H3)
     eq = E1, E2, E3
     eq = np.reshape(eq, (9,))
-    print('eq=', eq)
+    #print('eq=', eq)
     return eq
 
 
@@ -200,9 +200,9 @@ for i in range(20):
     #eigen = la.eig(w6)
     #print('new eigen value [',i,'] =', eigen)
     print('****************************************************') 
-    #print('l ki value are=', np.abs(l1[i+1,:]))
-    #print('m ki value are=', m1[i+1,:])
-    #print('n ki value are=', n1[i+1,:])
+    print('l ki value are=', np.abs(l1[i+1,:]))
+    print('m ki value are=', m1[i+1,:])
+    print('n ki value are=', n1[i+1,:])
 
 
     fig, ax = plt.subplots()
