@@ -132,7 +132,7 @@ for j in range(len(gray_imgs)):
     fig, ax = plt.subplots()
     ax.imshow(mark_boundaries(imgs[j](mask), segments_slic))
     #ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
-    plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'+str(segVal)+'.png')
+    plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'.png')
     #plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
     sx  = pd.DataFrame(sp_x).to_csv('./xData1.csv')
     sy  = pd.DataFrame(sp_y).to_csv('./yData1.csv')
