@@ -175,13 +175,14 @@ for j in range(len(gray_imgs)):
             i += 1
             p.append(mask2); q.append(cent_px)
             f1.append(f)
-        #print('i=', i)
+        print('i=', i)
         #print('f1=', f1)
         #print('f1 final=', np.shape(f1))
         #IMF = np.sum(f1)/(13*len(superpixel[segVal-1][0]))
         #print('IMF=', IMF)
-        #print('00000000000000000000000')
+        print('00000000000000000000000')
         IMF = np.sum(f1)/(13*i)
+        print('IMF=', IMF)
         f4.append(IMF)
         #print('f4=', f4)
         '''p1=[];p2=[];p3=[]
@@ -231,14 +232,14 @@ for j in range(len(gray_imgs)):
     im_area = np.append([im_area],[im_sp_area]); im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
 z1 = pd.DataFrame(im_area).to_csv('/flash/TerenzioU/program/im_area1.csv')
 z2 = pd.DataFrame(im_eccentricity).to_csv('/flash/TerenzioU/program/im_eccentricity1.csv')
-z3 = pd.DataFrame(im_IMF).to_csv('./flash/TerenzioU/program/im_IMF1.csv')
+z3 = pd.DataFrame(im_IMF).to_csv('/flash/TerenzioU/program/im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
 z = pd.DataFrame(im_gray_avg).to_csv('/flash/TerenzioU/program/im_gray_avg1.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
-fdf = pd.concat(vdf).to_csv('./flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
+fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
 
 #os.chdir("imgdir")
 extension = 'csv'
