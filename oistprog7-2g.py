@@ -114,7 +114,7 @@ for j in range(len(gray_imgs)):
         fig, ax = plt.subplots()
         # ax.imshow(imgs[j][mask])
         ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
-        plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
+        #plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
