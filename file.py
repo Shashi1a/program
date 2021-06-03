@@ -17,7 +17,7 @@ t = sp.var('t')
 #defining equation as a function -----------------------------------------------------
 def DNA(t,x,y,z):
     E1=[]; E2=[]; E3=[]
-    for n in range(3):
+    for n in range(2):
         I1 = (-V * (x[n + 1] + x[n - 1]) + chi * y[n] * x[n])/(hbar * sp.I)
         print('I1=', I1)
         #I3 =  -0.005*z[n] - 19.3548387096774*(np.abs(x[n])**2)
