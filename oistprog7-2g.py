@@ -189,10 +189,10 @@ for j in range(len(gray_imgs)):
         #if IMF > 40:
          #   P_ST = superpixel[segVal-1]
           #  p1.append(P_ST)
-        if IMF <= 25:
+        if IMF <= 20:
             P_UD = superpixel[segVal-1]
             p2.append(P_UD)
-        elif IMF > 25:
+        elif IMF > 20:
             P_OB = superpixel[segVal-1]
             p3.append(P_OB)
             f5.append(IMF)
