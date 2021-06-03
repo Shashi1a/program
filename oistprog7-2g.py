@@ -135,7 +135,7 @@ for j in range(len(gray_imgs)):
         f1 = [];f3 = [];f2 = []
         #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
     fig, ax = plt.subplots()
-    ax.imshow(mark_boundaries(gray_imgs[j]&cv2.cvtColor(mask, 0), segments_slic))
+    ax.imshow(mark_boundaries(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR), segments_slic))
     #ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
     plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'.png')
     #plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
