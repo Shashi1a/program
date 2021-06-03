@@ -205,7 +205,7 @@ for i in range(20):
     #print('n ki value are=', n1[i+1,:])
 
 
-
+    fig, ax = plt.subplots()
      #print('3=',sum(np.array(np.abs(l1))))
     plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
     plt.plot(np.linspace(0, 100, 100), m1[i+1, :])
