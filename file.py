@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import cmath
 import sympy as sp
@@ -206,9 +208,9 @@ for i in range(20):
 
 fig, ax = plt.subplots()
      #print('3=',sum(np.array(np.abs(l1))))
-plt.plot(np.linspace(0, 3, 3), np.abs(l1[20, :]))
-plt.plot(np.linspace(0, 3, 3), m1[20, :])
-plt.plot(np.linspace(0, 3, 3), n1[20, :])
-plt.ylim(-0.4, 1)
+ax.plot(np.linspace(0, 3, 3), np.abs(l1[20, :]))
+ax.plot(np.linspace(0, 3, 3), m1[20, :])
+ax.plot(np.linspace(0, 3, 3), n1[20, :])
+ax.ylim(-0.4, 1)
 plt.savefig('/flash/TerenzioU/program/DNAgraph.png')
 
