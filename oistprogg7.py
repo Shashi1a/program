@@ -49,8 +49,6 @@ def load_images(gray_folder):
     return gray_images
 
 gray_folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
-for file in gray_folders:
-    print('2=', file)
 gray_imgs = [gray_img for gray_folder in gray_folders for gray_img in load_images(gray_folder)]
 for j in range(len(gray_imgs)):
     cv2.imwrite('/flash/Terenzio/gray/gray_{j}.tif', gray_imgs[j])
@@ -133,7 +131,6 @@ for j in range(len(gray_imgs)):
         col =  np.size(superpixel[segVal-1][1])
         rows.append(row);cols.append(col)
         #print('rows=',rows);print('cols=',cols)
-        f1 = [];f3 = [];f2 = []
         #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
     sx  = pd.DataFrame(sp_x).to_csv('./xData1.csv')
     sy  = pd.DataFrame(sp_y).to_csv('./yData1.csv')
