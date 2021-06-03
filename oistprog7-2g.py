@@ -49,8 +49,6 @@ def load_images(gray_folder):
     return gray_images
 
 gray_folders = [os.path.join(root_folder, x) for x in ('oist1', 'oist2')]
-for file in gray_folders:
-    print('2=', file)
 gray_imgs = [gray_img for gray_folder in gray_folders for gray_img in load_images(gray_folder)]
 for j in range(len(gray_imgs)):
     cv2.imwrite('/flash/Terenzio/gray/gray_{j}.tif', gray_imgs[j])
