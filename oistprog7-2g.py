@@ -147,6 +147,7 @@ for j in range(len(gray_imgs)):
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
     sp_mask2 = []; sp_cent_px = []
     f3 =[]; f4 = []; f5=[]; p = []; q = []
+    p1=[];p2=[];p3=[]
     for segVal in np.unique(segments_slic):
         #print('seVal=', segVal) 
         i = 0; f1 = []
@@ -185,7 +186,6 @@ for j in range(len(gray_imgs)):
         #print('IMF=', IMF)
         f4.append(IMF)
         #print('f4=', f4)
-        p1=[];p2=[];p3=[]
         #if IMF > 40:
          #   P_ST = superpixel[segVal-1]
           #  p1.append(P_ST)
