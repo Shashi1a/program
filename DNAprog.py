@@ -266,4 +266,3 @@ for i in range(100):
     plt.ylim(-0.1, 1)
 plt.savefig('/flash/TerenzioU/program/DNA_polaron.png')
 
-'''
