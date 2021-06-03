@@ -83,7 +83,7 @@ for j in range(len(gray_imgs)):
     print('j=', j)
     fig, ax = plt.subplots()
     ax.imshow(mark_boundaries(imgs[j], segments_slic))
-    plt.savefig('markgrayimage.png')
+    plt.savefig('/flash/TerenzioU/program/markgrayimage.png')
     #print(f"SLIC number of segments:{len(np.unique(segments_slic))}")
     superpixel_list = sp_idx(segments_slic)
     superpixel = [idx for idx in superpixel_list]
@@ -114,7 +114,7 @@ for j in range(len(gray_imgs)):
         fig, ax = plt.subplots()
         # ax.imshow(imgs[j][mask])
         ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
-        plt.savefig('masked_image_'+str(j)+'_'+str(segVal)+'.png')
+        plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
