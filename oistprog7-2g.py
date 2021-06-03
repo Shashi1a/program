@@ -198,8 +198,9 @@ for j in range(len(gray_imgs)):
             f5.append(IMF)
             #print('f5=',f5)
         print('p3=',p3)
-        p_up = np.max(p3); p_fl = np.min(p3)
-        d_p = (p_up-p_fl)/len(p3)
+    print('final p3=',p3)
+    p_up = np.max(p3); p_fl = np.min(p3)
+    d_p = (p_up-p_fl)/len(p3)
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
