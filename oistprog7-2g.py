@@ -149,7 +149,7 @@ for j in range(len(gray_imgs)):
     sp_mask2 = []; sp_cent_px = []
     f3 =[]; f4 = []; p = []; q = []
     for segVal in np.unique(segments_slic):
-        #print('seVal=', segVal) 
+        print('seVal=', segVal) 
         i = 0; f1 = []
         for a1, b1, c1, d1, e1, a2, b2, c2, d2, e2 in zip(bx.iloc[segVal-1 ,1:rows[segVal-1]].astype(int), bx.iloc[segVal-1, 2:rows[segVal-1]-1].astype(int), bx.iloc[segVal-1 ,3:rows[segVal-1]-2].astype(int), bx.iloc[segVal-1, 4:rows[segVal-1]-3].astype(int), bx.iloc[segVal-1 ,5:rows[segVal-1]-4].astype(int), by.iloc[segVal-1, 1:rows[segVal-1]].astype(int), by.iloc[segVal-1 ,2:rows[segVal-1]-1].astype(int), by.iloc[segVal-1, 3:rows[segVal-1]-2].astype(int), by.iloc[segVal-1 ,4:rows[segVal-1]-3].astype(int), by.iloc[segVal-1, 5:rows[segVal-1]-4].astype(int)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
@@ -157,7 +157,8 @@ for j in range(len(gray_imgs)):
             print('m-2=', a1);print('n-2=', a2)'''
             mask2 = np.array([gray_imgs[j][a1, a2], gray_imgs[j][b1, a2], gray_imgs[j][b1, b2], gray_imgs[j][c1, a2], gray_imgs[j][c1, b2], gray_imgs[j][c1, c2], gray_imgs[j][c1, d2], gray_imgs[j][d1, b2], gray_imgs[j][d1, c2], gray_imgs[j][d1, d2], gray_imgs[j][d1, e2], gray_imgs[j][e2, d2], gray_imgs[j][e1, e2]])
             cent_px = [gray_imgs[j][c1, c2]]
-            #print('mask2=', mask2); print('center_pixel=', cent_px)
+            print('mask2=', mask2)
+            #print('center_pixel=', cent_px)
             f = []
             for k in range(len(mask2)):
                 #print('k=',k) 
