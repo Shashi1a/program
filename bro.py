@@ -20,11 +20,13 @@ E_0 = -0.5727
 s0 = [x_0, y_0]#, E_0]
 s0 = np.reshape(s0, (200,))
 s0 = np.append(s0, E_0)
+s0 = s0.flatten()
 
 s1 = [x, y]#, E_0]
 s1 = np.reshape(s1, (200,))
 s1 = np.append(s1, E)
 #s2 = sp.Matrix(s1)
+s1 = s1.flatten()
 
 def F(s1):
     E1 = [];E2 = [];E3 = []; E4=[]
@@ -51,6 +53,7 @@ def F(s1):
     eq = E1, E2
     eq = np.reshape(eq, (200,))
     eq = np.append([eq], [E4])
+    eq = eq.flatten()
     return eq
 
   
