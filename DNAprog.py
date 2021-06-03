@@ -1,4 +1,6 @@
 import numpy as np
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import cmath
 import sympy as sp
