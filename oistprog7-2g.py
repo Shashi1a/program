@@ -61,7 +61,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(imgs[j], n_segments=1500, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(imgs[j], n_segments=3000, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -76,7 +76,7 @@ sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j]))); im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
 im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_max = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(imgs[j], n_segments=1500, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(imgs[j], n_segments=3000, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     #print('slic segments are', segments_slic)
     print('j=', j)
@@ -135,7 +135,7 @@ for j in range(len(gray_imgs)):
         f1 = [];f3 = [];f2 = []
         #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
     fig, ax = plt.subplots()
-    ax.imshow(mark_boundaries(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR), segments_slic))
+    ax.imshow(mark_boundaries(gray_imgs[j], segments_slic))
     #ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
     plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'.png')
     #plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
