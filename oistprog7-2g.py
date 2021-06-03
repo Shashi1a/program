@@ -146,7 +146,7 @@ for j in range(len(gray_imgs)):
     by = pd.read_csv('./yData1.csv')
     #print('3rd value = ', bx.iloc[6]);print('6th row=', rows[6]);print('sp_x=', sp_x[5]);print('sp_y=', sp_y[5])
     sp_mask2 = []; sp_cent_px = []
-    f3 =[]; f4 = []; p = []; q = []
+    f3 =[]; f4 = []; f5=[]; p = []; q = []
     for segVal in np.unique(segments_slic):
         #print('seVal=', segVal) 
         i = 0; f1 = []
@@ -197,7 +197,7 @@ for j in range(len(gray_imgs)):
             p3.append(P_OB)
             f5.append(IMF)
             #print('f5=',f5)
-        print('p3=',p3)
+        #print('p3=',p3)
     print('final p3=',p3)
     p_up = np.max(p3); p_fl = np.min(p3)
     d_p = (p_up-p_fl)/len(p3)
