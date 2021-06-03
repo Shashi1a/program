@@ -61,7 +61,7 @@ def sp_idx(s, index=True):
 def numberofsegments():
     b = np.empty((0, 100))
     for j in range(len(imgs)):
-        segments_slic = slic(imgs[j], n_segments=1000, compactness=10, sigma=1, start_label=1)
+        segments_slic = slic(imgs[j], n_segments=1500, compactness=10, sigma=1, start_label=1)
         a = len(np.unique(segments_slic))
         b = np.append([b], [a])
     return b
@@ -76,7 +76,7 @@ sp_id = np.empty((0, int(a[j]))); im = np.empty((0, int(a[j])))
 im_IMF = np.empty((0, int(a[j]))); im_p1 = np.empty((0, int(a[j]))); im_p2 = np.empty((0, int(a[j]))); im_p3 = np.empty((0, int(a[j])))
 im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j]))); im_gray_max = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
-    segments_slic = slic(imgs[j], n_segments=1000, compactness=10, sigma=1, start_label=1)
+    segments_slic = slic(imgs[j], n_segments=1500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
     #print('slic segments are', segments_slic)
     print('j=', j)
@@ -148,7 +148,7 @@ for j in range(len(gray_imgs)):
     sp_mask2 = []; sp_cent_px = []
     f3 =[]; f4 = []; p = []; q = []
     for segVal in np.unique(segments_slic):
-        print('seVal=', segVal) 
+        #print('seVal=', segVal) 
         i = 0; f1 = []
         for a1, b1, c1, d1, e1, a2, b2, c2, d2, e2 in zip(bx.iloc[segVal-1 ,1:rows[segVal-1]].astype(int), bx.iloc[segVal-1, 2:rows[segVal-1]-1].astype(int), bx.iloc[segVal-1 ,3:rows[segVal-1]-2].astype(int), bx.iloc[segVal-1, 4:rows[segVal-1]-3].astype(int), bx.iloc[segVal-1 ,5:rows[segVal-1]-4].astype(int), by.iloc[segVal-1, 1:rows[segVal-1]].astype(int), by.iloc[segVal-1 ,2:rows[segVal-1]-1].astype(int), by.iloc[segVal-1, 3:rows[segVal-1]-2].astype(int), by.iloc[segVal-1 ,4:rows[segVal-1]-3].astype(int), by.iloc[segVal-1, 5:rows[segVal-1]-4].astype(int)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
@@ -237,7 +237,7 @@ z3 = pd.DataFrame(im_IMF).to_csv('/flash/TerenzioU/program/im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
 z = pd.DataFrame(im_gray_max).to_csv('/flash/TerenzioU/program/im_gray_max1.csv')
-v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
+v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_max, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
 fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
