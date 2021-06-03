@@ -79,7 +79,7 @@ im_area = np.empty ((0, int(a[j]))); im_eccentricity = np.empty ((0, int(a[j])))
 for j in range(len(gray_imgs)):
     segments_slic = slic(imgs[j], n_segments=500, compactness=10, sigma=1, start_label=1)
     segments_ids = np.unique(segments_slic)
-    print('slic segments are', segments_slic)
+    #print('slic segments are', segments_slic)
     print('j=', j)
     #fig, ax = plt.subplots()
     #ax.imshow(mark_boundaries(imgs[j], segments_slic))
@@ -104,13 +104,19 @@ for j in range(len(gray_imgs)):
         im_sp_area.append(sp_area)
         im_sp_eccentricity.append(sp_eccentricity)
         im_sp_gray_avg.append(sp_mean_intensity)
+        im_graymax = np.max(sp_im_gray_avg)
+        im_grayavg = np.mean(sp_im_gray_avg)
+        im_graymin = np.min(sp_im_gray_avg)
+        print('imf_graymax=', im_graymax)
+        print('imf_grayavg=', im_grayavg)
+        print('imf_graymin=', im_graymin)
     rows = []; cols = []
     for segVal in np.unique(segments_slic):  #segval is im_sp_centroid=[] 1,2,3,4,5,6,7,8,9 i.e. superpixels
         #print('segmentslic=',len(np.unique(segments_slic)))
         #print('segval=',segVal)
         mask = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
-        mask[segments_slic == segVal] = 255
-        pos = np.where(mask == 255)
+        mask[segments_slic == segVal] = 0
+        pos = np.where(mask == 0)
         x = pos[:][0]  #  XY = np.array([superpixel[i][0], superpixel[i][1]]).T
         y = pos[:][1]
         ymin = np.min(pos[:][1]);ymax = np.max(pos[:][1])
@@ -143,7 +149,7 @@ for j in range(len(gray_imgs)):
     sp_mask2 = []; sp_cent_px = []
     f3 =[]; f4 = []; p = []; q = []
     for segVal in np.unique(segments_slic):
-        print('seVal=', segVal) 
+        #print('seVal=', segVal) 
         i = 0; f1 = []
         for a1, b1, c1, d1, e1, a2, b2, c2, d2, e2 in zip(bx.iloc[segVal-1 ,1:rows[segVal-1]].astype(int), bx.iloc[segVal-1, 2:rows[segVal-1]-1].astype(int), bx.iloc[segVal-1 ,3:rows[segVal-1]-2].astype(int), bx.iloc[segVal-1, 4:rows[segVal-1]-3].astype(int), bx.iloc[segVal-1 ,5:rows[segVal-1]-4].astype(int), by.iloc[segVal-1, 1:rows[segVal-1]].astype(int), by.iloc[segVal-1 ,2:rows[segVal-1]-1].astype(int), by.iloc[segVal-1, 3:rows[segVal-1]-2].astype(int), by.iloc[segVal-1 ,4:rows[segVal-1]-3].astype(int), by.iloc[segVal-1, 5:rows[segVal-1]-4].astype(int)):
             '''print('m+2=', e1);print('n+2=',e2);print('m+1=', d1);print('n+1=', d2)
@@ -178,6 +184,12 @@ for j in range(len(gray_imgs)):
         IMF = np.sum(f1)/(13*i)
         f4.append(IMF)
         #print('f4=', f4)
+        IMF_max = np.max(f4)
+        IMF_avg = np.mean(f4)
+        IMF_min = np.min(f4)
+        print('imf_max=', IMF_max)
+        print('imf_avg=', IMF_avg)
+        print('imf_min=', IMF_min)
         '''p1=[];p2=[];p3=[]
         if IMF > 40:
             P_ST = superpixel[segVal-1]
@@ -215,43 +227,35 @@ for j in range(len(gray_imgs)):
             print('second number of maximum pixel are=', sp_2_pixmax) '''
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); im_p3 = np.append([im_p3],[p3])
     im_IMF = np.append([im_IMF], [f4])
-    IMF_max1 = np.max(f4)#; IMF_max2 = np.max(f4[484:967])
-    IMF_min1 = np.min(f4)#; IMF_min2 = np.min(f4[484:967])
     im = np.append([im], [im_no]); sp_id = np.append([sp_id], [segments_ids])
     im_x = np.append([im_x], [sp_x]);im_y = np.append([im_y], [sp_y])
     sp_centx = np.append([sp_centx], [centx]);sp_centy = np.append([sp_centy], [centy])
     sp_width = np.append([sp_width], [w]);sp_height = np.append([sp_height], [h])
     im_segments_slic.append(segments_slic); im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
-    im_graymax1 = np.max(im_gray_avg)#; im_graymax2 = np.max(im_gray_avg[0:483])
-    im_graymin1 = np.min(im_gray_avg)#; im_graymin2 = np.min(im_gray_avg[0:483])
-    print('imf_max1=', IMF_max1)#; print('imf_max2=', IMF_max2)
-    print('imf_min1=', IMF_min1)#; print('imf_min2=', IMF_min2)
-    print('imf_graymax1=', im_graymax1)#; print('imf_max2=', im_graymax2)
-    print('imf_graymin1=', im_graymin1)#; print('imf_graymin2=', im_graymin2)
     im_area = np.append([im_area],[im_sp_area]); im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
-z1 = pd.DataFrame(im_area).to_csv('./im_area1.csv')
-z2 = pd.DataFrame(im_eccentricity).to_csv('./im_eccentricity1.csv')
-z3 = pd.DataFrame(im_IMF).to_csv('./im_IMF1.csv')
+z1 = pd.DataFrame(im_area).to_csv('./flash/TerenzioU/program/im_area1.csv')
+z2 = pd.DataFrame(im_eccentricity).to_csv('./flash/TerenzioU/program/im_eccentricity1.csv')
+z3 = pd.DataFrame(im_IMF).to_csv('./flash/TerenzioU/program/im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 #zdf = pd.Dataframe(z2, columns=['p1', 'p2', 'p3']).to_csv('./pixelclass' , sep=',', index=false, header=True)
-z = pd.DataFrame(im_gray_avg).to_csv('./im_gray_avg1.csv')
+z = pd.DataFrame(im_gray_avg).to_csv('./flash/TerenzioU/program/im_gray_avg1.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
-fdf = pd.concat(vdf).to_csv('./im_sp_data1.csv', sep=',', index=False, header=True)
+fdf = pd.concat(vdf).to_csv('./flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
 
-os.chdir("imgdir")
+#os.chdir("imgdir")
 extension = 'csv'
 all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
 for j in range(len(gray_imgs)):
-    for filename in '/flash/TerenzioU/imgdir':
-        d = pd.read_csv(r'/flash/TerenzioU/imgdir/gray_{}.tif.csv'.format(j))
+    for filename in '/flash/TerenzioU/program/imgdir':
+        d = pd.read_csv(r'/flash/TerenzioU/program/imgdir/gray_{}.tif.csv'.format(j))
         d['Img no'] = j
 #        d.to_csv(r'/home/s/shubhangi-goyal/imgdir/gray_{j}.tif.csv', index=False)
 #combine all files in the list
 combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
 #export to csv
-combined_csv.to_csv('./flash/TerennzioU/img_data.csv', index=False, encoding='utf-8-sig')
+combined_csv.to_csv('./flash/TerennzioU/program/img_data.csv', index=False, encoding='utf-8-sig')
 #df1 = pd.read_csv('/home/s/shubhangi-goyal/sp_data.csv')
 #df1 = df1.drop(['height', 'width', 'eccentricity', 'sp_id'], axis=1)
 #df2 = pd.read_csv('./img_data.csv')
