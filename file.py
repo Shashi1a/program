@@ -206,11 +206,11 @@ for i in range(20):
     print('m ki value are=', m1[i+1,:])
     print('n ki value are=', n1[i+1,:])
 
-fig, ax = plt.subplots()
+#fig, ax = plt.subplots()
      #print('3=',sum(np.array(np.abs(l1))))
-ax.plot(np.linspace(0, 3, 3), np.abs(l1[20, :]))
-ax.plot(np.linspace(0, 3, 3), m1[20, :])
-ax.plot(np.linspace(0, 3, 3), n1[20, :])
-ax.ylim(-0.4, 1)
+plt.plot(np.linspace(0, 3, 3), np.abs(l1[20, :]))
+plt.plot(np.linspace(0, 3, 3), m1[20, :])
+plt.plot(np.linspace(0, 3, 3), n1[20, :])
+plt.ylim(-0.4, 1)
 plt.savefig('/flash/TerenzioU/program/DNAgraph.png')
 
