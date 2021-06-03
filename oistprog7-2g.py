@@ -189,11 +189,11 @@ for j in range(len(gray_imgs)):
         #if IMF > 40:
          #   P_ST = superpixel[segVal-1]
           #  p1.append(P_ST)
-        if IMF <= 20:
-            P_UD = superpixel[segVal-1]
+        if IMF <= 19:
+            P_UD = [segVal-1]
             p2.append(P_UD)
-        elif IMF > 20:
-            P_OB = superpixel[segVal-1]
+        elif IMF > 19:
+            P_OB = [segVal-1]
             p3.append(P_OB)
             f5.append(IMF)
             #print('f5=',f5)
@@ -235,15 +235,15 @@ for j in range(len(gray_imgs)):
     sp_width = np.append([sp_width], [w]);sp_height = np.append([sp_height], [h])
     im_segments_slic.append(segments_slic); im_gray_avg = np.append([im_gray_avg],[im_sp_gray_avg])
     im_area = np.append([im_area],[im_sp_area]); im_eccentricity = np.append([im_eccentricity],[im_sp_eccentricity])
-    q1  = pd.DataFrame(im_sp_gray_max).to_csv('/flash/TerenzioU/program/sp_max_intensity.csv')   
+    q1  = pd.DataFrame(im_sp_gray_avg).to_csv('/flash/TerenzioU/program/sp_avg_intensity.csv')   
 z1 = pd.DataFrame(im_area).to_csv('/flash/TerenzioU/program/im_area1.csv')
 z2 = pd.DataFrame(im_eccentricity).to_csv('/flash/TerenzioU/program/im_eccentricity1.csv')
 z3 = pd.DataFrame(im_IMF).to_csv('/flash/TerenzioU/program/im_IMF1.csv')
 #z4 = np.column_stack([im_p1, im_p2, im_p3])
 z4 = pd.Dataframe(im_p1, columns=['IMF_p3']).to_csv('./IMF_p3', index=false, header=True)
-z5 = pd.Dataframe(p3, columns=['p3']).to_csv('./pixelclass', index=false, header=True)
-z = pd.DataFrame(im_gray_avg).to_csv('/flash/TerenzioU/program/im_gray_max1.csv')
-v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_max, im_eccentricity])
+z5 = pd.Dataframe(im_p3, columns=['im_p3']).to_csv('./pixelclass', index=false, header=True)
+z = pd.DataFrame(im_gray_avg).to_csv('/flash/TerenzioU/program/im_gray_avg1.csv')
+v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
 df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
 vdf.append(df)
 fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
