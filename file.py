@@ -9,7 +9,7 @@ import scipy.linalg as la
 
 
 #parameters   --------------------------------------------------------------------
-m=0.031; D=0.04; a=4.45; k=0.04; rho=0.5; beta=0.35; V=0.1; chi=0.0; gamma=0.005; hbar=0.00066
+m=0.031; D=0.04; a=4.45; k=0.04; rho=0.5; beta=0.35; V=0.1; chi=0.6; gamma=0.005; hbar=0.00066
 n = 15
 x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, y0, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, y12, y13, y14, y15, z0, z1, z2, z3, z4, z5, z6, z7, z8, z9, z10, z11, z12, z13, z14, z15 = sp.var('x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15 z0 z1 z2 z3 z4 z5 z6 z7 z8 z9 z10 z11 z12 z13 z14 z15')
 x = [x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15]
@@ -159,7 +159,7 @@ t[0] = t_0
 
 
 #RK4 method --------------------------------------------------------
-for i in range(50):
+for i in range(100):
     print('i=', i)
     #if sum(np.array(np.abs(l1)))<=1:
         #print('2=',i)
@@ -185,10 +185,10 @@ for i in range(50):
     l1[i+1, :] = l1[i, :] + (a1 + 2 * a2 + 2 * a3 + a4) * h / 6
     m1[i+1, :] = m1[i, :] + (b1 + 2 * b2 + 2 * b3 + b4) * h / 6
     n1[i+1, :] = n1[i, :] + (c1 + 2 * c2 + 2 * c3 + c4) * h / 6
-    print('3=', sum((np.abs(x) ** 2) for x in l1[i + 1, :]))
-    sum_square = 1/sp.sqrt(sum(np.abs(x) ** 2 for x in l1[i+1, :]))
-    print('sumsquare = ', sum_square)
-    print('*****************************************************************************************************') 
+    #print('3=', sum((np.abs(x) ** 2) for x in l1[i + 1, :]))
+    #sum_square = 1/sp.sqrt(sum(np.abs(x) ** 2 for x in l1[i+1, :]))
+    #print('sumsquare = ', sum_square)
+    #print('*****************************************************************************************************') 
     '''eig1[i] = la.eig(l1[i+1, :])
     eig2[i] = la.eig(m1[i+1, :])
     eig3[i] = la.eig(n1[i+1, :])
@@ -204,10 +204,10 @@ for i in range(50):
     #print('vvalue =', w6)
     #eigen = la.eig(w6)
     #print('new eigen value [',i,'] =', eigen)
-    print('****************************************************') 
-    print('l ki value are=', np.abs(l1[i+1,:]))
-    print('m ki value are=', m1[i+1,:])
-    print('n ki value are=', n1[i+1,:])
+    #print('****************************************************') 
+    #print('l ki value are=', np.abs(l1[i+1,:]))
+    #print('m ki value are=', m1[i+1,:])
+    #print('n ki value are=', n1[i+1,:])
 
 #fig, ax = plt.subplots()
      #print('3=',sum(np.array(np.abs(l1))))
