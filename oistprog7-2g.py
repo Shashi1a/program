@@ -204,29 +204,30 @@ for j in range(len(gray_imgs)):
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
+    l = []
     for n in range(0,len(p3)):
         mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask3[segments_slic == p3[n]] = 255
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
-        print('*****************')
+        #print('*****************')
         sp_segments_ids = np.unique(sp_segments_slic)
         #sp_segments_ids = np.array(sp_segments_ids).astype('int')
         #print('unique segments are=', sp_segments_ids)
         #print('unique segments are=', np.array(sp_segments_ids).astype('int'))
-        print('sp_segments_slic=', sp_segments_slic)
+        #print('sp_segments_slic=', sp_segments_slic)
         sp_pixel_list = sp_idx(sp_segments_slic)
         sp_pixel = [idx for idx in sp_pixel_list]
         #print('so_pixel_list[',j,']=',sp_pixel_list)
-        print('sp_pixel[','j',']=',sp_pixel)
-        l = []
-        for k in sp_segments_ids:
-            l1 = len(sp_pixel[k-1])
-            l.append(l1)
-        sp_pixmax = np.max(l)
-        print('number of maximum pixel are=', sp_pixmax)
-        print('\n')
-        sp_2_pixmax = np.max(l-sp_pixmax)
-        print('second number of maximum pixel are=', sp_2_pixmax)
+        #print('sp_pixel[','n',']=',sp_pixel[n])
+        #for k in sp_segments_ids:
+        l1 = len(sp_pixel[n])
+        l.append(l1)
+    print('l=',l)
+    sp_pixmax = np.max(l)
+    print('maximum sppixel is=', sp_pixmax)
+    print('\n')
+    sp_2_pixmax = np.max(l-sp_pixmax)
+    print('second number of maximum pixel is=', sp_2_pixmax)
     fig, ax = plt.subplots()
     ax.imshow(mark_boundaries(imgs[j], sp_segments_slic))
     plt.savefig('/flash/TerenzioU/program/sp_mark.png')        
