@@ -206,9 +206,9 @@ for j in range(len(gray_imgs)):
 # and the second max and then define function A and theta and thus calculate u1 and u2
     l = []
     for n in range(0,len(p3)):
-        mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
-        mask3[segments_slic == p3[n]] = 255
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
+        mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
+        mask3[sp_segments_slic == n] = 255
         #print('*****************')
         sp_segments_ids = np.unique(sp_segments_slic)
         #sp_segments_ids = np.array(sp_segments_ids).astype('int')
