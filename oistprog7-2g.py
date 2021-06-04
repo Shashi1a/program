@@ -219,7 +219,7 @@ for j in range(len(gray_imgs)):
         #print('so_pixel_list[',j,']=',sp_pixel_list)
         #print('sp_pixel[','j',']=',sp_pixel)
         l = []
-        for k in range (sp_segments_ids):
+        for k in sp_segments_ids:
             l1 = len(sp_pixel)
             l.append(l)
             sp_pixmax = np.max(l)
