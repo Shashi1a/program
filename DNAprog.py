@@ -162,7 +162,7 @@ t[0] = t_0
 
 
 #RK4 method --------------------------------------------------------
-for i in range(10):
+for i in range(200):
     print('i=', i)
     #if sum(np.array(np.abs(l1)))<=1:
         #print('2=',i)
