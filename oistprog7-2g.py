@@ -210,13 +210,15 @@ for j in range(len(gray_imgs)):
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
         print('*****************')
         sp_segments_ids = np.unique(sp_segments_slic)
+        print('unique segments are=', sp_segments_ids)
+        print('unique segments are=', np.array(sp_segments_ids).astype('int'))
         print('sp_segments_slic=', sp_segments_slic)
         sp_pixel_list = sp_idx(sp_segments_slic)
         sp_pixel = [idx for idx in sp_pixel_list]
         #print('so_pixel_list[',j,']=',sp_pixel_list)
         #print('sp_pixel[','j',']=',sp_pixel)
         l = []
-        for k in range(np.unique(sp_segments_slic)):
+        for k in range(np.array(sp_segments_ids).astype('int')):
             l1 = len(sp_pixel)
             l.append(l)
             sp_pixmax = np.max(l)
