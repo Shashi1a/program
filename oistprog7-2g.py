@@ -204,9 +204,9 @@ for j in range(len(gray_imgs)):
 # if we devide ith superpixel in P_OB into 10 parts. and calculate ...
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
-    for j in range(1,len(p3)):
+    for n in range(0,len(p3)):
         mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
-        mask3[segments_slic == p3[j]] = 255
+        mask3[segments_slic == p3[n]] = 255
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
         print('*****************')
         sp_segments_ids = np.unique(sp_segments_slic)
@@ -220,7 +220,7 @@ for j in range(len(gray_imgs)):
         print('sp_pixel[','j',']=',sp_pixel)
         l = []
         for k in sp_segments_ids:
-            l1 = len(sp_pixel[k])
+            l1 = len(sp_pixel[k-1])
             l.append(l1)
         sp_pixmax = np.max(l)
         print('number of maximum pixel are=', sp_pixmax)
