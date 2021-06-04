@@ -233,7 +233,7 @@ for j in range(len(gray_imgs)):
     fig, ax = plt.subplots()
     c2 = ax.imshow(mark_boundaries(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), sp_segments_slic), cmap = 'Blues')
     fig.colorbar(c2, ax = ax)
-    plt.savefig('/flash/TerenzioU/program/sp_mark.png')        
+    plt.savefig('/flash/TerenzioU/program/sp_mark_'+str(j)+'.png')        
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); 
     im_p3 = np.append([im_p3],[p3])
     im_p1 = np.append([im_p1], [f5])
