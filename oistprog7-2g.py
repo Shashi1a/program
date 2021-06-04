@@ -208,6 +208,7 @@ for j in range(len(gray_imgs)):
     l = []
     for n in range(0,len(p3)):
         mask3 = np.ones(p3, dtype='uint8')
+ #segmentation of only superpixels stored in p3 not the whole image 
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
         #mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask3[sp_segments_slic == n] = 255
