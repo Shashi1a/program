@@ -207,7 +207,7 @@ for j in range(len(gray_imgs)):
 # and the second max and then define function A and theta and thus calculate u1 and u2
     l = []
     for n in range(0,len(p3)):
-        mask3 = np.ones(p3.flatten(), dtype='uint8')
+        mask3 = np.ones((np.array(p3)).flatten(), dtype='uint8')
  #segmentation of only superpixels stored in p3 not the whole image 
         sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
         #mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
