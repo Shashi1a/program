@@ -207,12 +207,14 @@ for j in range(len(gray_imgs)):
     for j in range(1,len(p3)):
         mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
         mask3[segments_slic == p3[j]] = 255
-        sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=500, compactness=10, sigma=1, start_label=1)
+        sp_segments_slic = slic(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=50, compactness=10, sigma=1, start_label=1)
         print('*****************')
+        sp_segments_ids = np.unique(sp_segments_slic)
+        print('sp_segments_slic=', sp_segments_slic)
         sp_pixel_list = sp_idx(sp_segments_slic)
         sp_pixel = [idx for idx in sp_pixel_list]
-        print('so_pixel_list[',j,']=',sp_pixel_list)
-        print('sp_pixel[','j',']=',sp_pixel)
+        #print('so_pixel_list[',j,']=',sp_pixel_list)
+        #print('sp_pixel[','j',']=',sp_pixel)
         l = []
         for k in range(np.unique(sp_segments_slic)):
             l1 = len(sp_pixel)
