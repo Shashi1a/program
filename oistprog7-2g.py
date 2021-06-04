@@ -189,10 +189,10 @@ for j in range(len(gray_imgs)):
         #if IMF > 40:
          #   P_ST = superpixel[segVal-1]
           #  p1.append(P_ST)
-        if IMF <= 19:
+        if IMF <= 29:
             P_UD = [segVal-1]
             p2.append(P_UD)
-        elif IMF > 19:
+        elif IMF > 29:
             P_OB = [segVal-1]
             p3.append(P_OB)
             f5.append(IMF)
@@ -205,11 +205,10 @@ for j in range(len(gray_imgs)):
 #number of pixel in each part and then find one with max number of pixel
 # and the second max and then define function A and theta and thus calculate u1 and u2
     for j in range(1,len(p3)):
-        sp_segments_slic = slic(p3[j], n_segments=500, compactness=10, sigma=1, start_label=1)
+        mask3 = np.ones(imgs[j].shape[:2], dtype='uint8') #   self.height, self.width = img.shape[:2]
+        mask3[segments_slic == p3[j]] = 255
+        sp_segments_slic = slic(img[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), n_segments=500, compactness=10, sigma=1, start_label=1)
         print('*****************')
-        fig, ax = plt.subplots()
-        ax.imshow(mark_boundaries(imgs[j], sp_segments_slic))
-        plt.savefig('/flash/TerenzioU/program/sp_mark.png')
         sp_pixel_list = sp_idx(sp_segments_slic)
         sp_pixel = [idx for idx in sp_pixel_list]
         print('so_pixel_list[',j,']=',sp_pixel_list)
@@ -222,7 +221,10 @@ for j in range(len(gray_imgs)):
             print('number of maximum pixel are=', sp_pixmax)
             print('\n')
             sp_2_pixmax = np.max(l-sp_pixmax)
-            print('second number of maximum pixel are=', sp_2_pixmax) 
+            print('second number of maximum pixel are=', sp_2_pixmax)
+    fig, ax = plt.subplots()
+    ax.imshow(mark_boundaries(imgs[j], sp_segments_slic))
+    plt.savefig('/flash/TerenzioU/program/sp_mark.png')        
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); 
     im_p3 = np.append([im_p3],[p3])
     im_p1 = np.append([im_p1], [f5])
