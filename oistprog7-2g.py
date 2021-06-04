@@ -135,7 +135,8 @@ for j in range(len(gray_imgs)):
         f1 = [];f3 = [];f2 = []
         #print('shape of superpixel=', np.shape(superpixel[segVal-1]))
     fig, ax = plt.subplots()
-    ax.imshow(mark_boundaries(gray_imgs[j], segments_slic))
+    c1 = ax.imshow(mark_boundaries(gray_imgs[j], segments_slic), cmap = 'Reds')
+    fig.colorbar(c1, ax = ax)
     #ax.imshow(imgs[j]&cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR))
     plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'.png')
     #plt.savefig('/flash/TerenzioU/program/masked_image_'+str(j)+'_'+str(segVal)+'.png')
@@ -230,7 +231,8 @@ for j in range(len(gray_imgs)):
     sp_2_pixmax = np.max(l-sp_pixmax)
     print('second number of maximum pixel is=', sp_2_pixmax)
     fig, ax = plt.subplots()
-    ax.imshow(mark_boundaries(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), sp_segments_slic))
+    c2 = ax.imshow(mark_boundaries(imgs[j]&cv2.cvtColor(mask3, cv2.COLOR_GRAY2BGR), sp_segments_slic), cmap = 'Blues')
+    fig.colorbar(c2, ax = ax)
     plt.savefig('/flash/TerenzioU/program/sp_mark.png')        
     #im_p1 = np.append([im_p1],[p1]); im_p2 = np.append([im_p2],[p2]); 
     im_p3 = np.append([im_p3],[p3])
