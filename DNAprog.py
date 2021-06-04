@@ -70,14 +70,14 @@ def DNA(t,x,y,z):
     return eq
 
 
-w1 = DNA(t,x,y,z)
+'''w1 = DNA(t,x,y,z)
 w2 = sp.Matrix(w1)
 w3 = [x, y, z]             #, E_0]
 w3 = np.reshape(w3, (300,))
 
 #w3 = np.append(w3, t)
 w4 = w2.jacobian(w3)
-
+'''
 
 
 #Initialisation  ----------------------------------------------------
