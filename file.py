@@ -221,7 +221,8 @@ for i in range(998):
     zdata = t[i]
     xdata = i
     ydata = np.abs(l1[i+1, :])
-    ax.plot_surface(xdata, ydata, zdata, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
+    ax.plot3D(xdata, ydata, zdata, 'green')
+    #ax.plot_surface(xdata, ydata, zdata, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
     ax.set_title('Polaron n = 15')
     ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
     #plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
