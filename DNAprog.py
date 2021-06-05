@@ -121,7 +121,7 @@ for i in range(1000):
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])'''
 #saving data in database and plotting 
-    fig = plt.figure()
+    '''fig = plt.figure()
     ax = plt.gca(projection='3d')
     # Data for a three-dimensional line
     zline = np.linspace(0.00001, .01, 997)
