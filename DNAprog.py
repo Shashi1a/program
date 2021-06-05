@@ -1,10 +1,10 @@
 import numpy as np
 #from mpl_toolkits import mplot3d
-from mpl_toolkits.mplot3d.axes3d import Axes3D
+#from mpl_toolkits.mplot3d.axes3d import Axes3D
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib import cm
+#from matplotlib import cm
 import cmath
 import sympy as sp
 import scipy.linalg as la
@@ -263,7 +263,7 @@ for i in range(1000):
     #print('l ki value are=', np.abs(l1[i+1,:]))
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])
-    fig = plt.figure()
+    '''fig = plt.figure()
     ax = plt.gca(projection='3d')
     # Data for a three-dimensional line
     zline = np.linspace(0.00001, .01, 997)
@@ -281,12 +281,13 @@ for i in range(1000):
     ax.plot_surface(x, y, z, rstride=1, cstride=1,cmap=cm.coolwarm, linewidth=0, antialiased=False)
     ax.set_title('Polaron')
     ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
-    ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')
+    ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')'''
+fig, ax = plt.subplots()
 
         #print('3=',sum(np.array(np.abs(l1))))
-    #plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
-    #plt.plot(np.linspace(0, 100, 100), m1[i+1, :])
-    #plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
-    #plt.ylim(-0.1, 1)
+plt.plot(np.linspace(0, 1, 100), np.abs(l1[998, :]))
+plt.plot(np.linspace(0, 100, 100), m1[998, :])
+#plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
+plt.ylim(-0.4, 1)
 plt.savefig('/flash/TerenzioU/program/DNA_polaron_chi0.6.png')
 
