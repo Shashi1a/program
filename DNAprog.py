@@ -34,9 +34,9 @@ def DNA(t,x,y,z):
                          0.01 * sp.exp(-0.35 * y[n] - 0.35 * y[n+1]) + 0.02) - 32.258064516129 * (2 * y[n] - 2 * y[n-1]) * (
                          0.01 * sp.exp(-0.35 * y[n] - 0.35 * y[n-1]) + 0.02) - 19.3548387096774 * (np.abs(x[n])**2)
 	I2 = z[n]
-        E1.append(I1)
-        E2.append(I2)
-        E3.append(I3)
+	E1.append(I1)
+	E2.append(I2)
+	E3.append(I3)
     H1 = (-V * (x[98] + x[0]) + chi * y[99] * x[99])/(hbar * sp.I)        #* (0+1j))
     #print('H1=', H1)
     H3 = -0.005 * z[99] + 11.4838709677419 * (-1.0 + sp.exp(-4.45 * y[99])) * sp.exp(-4.45 * y[99]) + 0.112903225806452 * (
@@ -121,7 +121,7 @@ for i in range(1000):
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])'''
 #saving data in database and plotting 
-    '''fig = plt.figure()
+    fig = plt.figure()
     ax = plt.gca(projection='3d')
     # Data for a three-dimensional line
     zline = np.linspace(0.00001, .01, 997)
