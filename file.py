@@ -235,5 +235,5 @@ plt.plot(np.linspace(0, 15, 15), np.abs(l1[997, :]))
 plt.plot(np.linspace(0, 15, 15), m1[997, :])
 #plt.plot(np.linspace(0, 15, 15), n1[i, :])
 plt.ylim(-0.4, 1)
-plt.savefig('/flash/TerenzioU/program/DNAgraph_0.0.png')
+plt.savefig('/flash/TerenzioU/program/DNAgraph_1/0.0.png')
 
