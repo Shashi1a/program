@@ -155,7 +155,7 @@ t[0] = t_0
 
 
 #RK4 method --------------------------------------------------------
-for i in range(1000):
+for i in range(998):
     print('i=', i)
     #if sum(np.array(np.abs(l1)))<=1:
         #print('2=',i)
@@ -260,8 +260,8 @@ w1 = pd.DataFrame(l1).to_csv('/flash/TerenzioU/program/l1(100/0.0).csv')
 w2 = pd.DataFrame(m1).to_csv('/flash/TerenzioU/program/m1(100/0.0).csv')
 w3 = pd.DataFrame(n1).to_csv('/flash/TerenzioU/program/n1(100/0.0).csv')
 fig, ax = plt.subplots()
-plt.plot(np.linspace(0, 100, 100), np.abs(l1[998, :]))
-plt.plot(np.linspace(0, 100, 100), m1[998, :])
+plt.plot(np.linspace(0, 100, 100), np.abs(l1[997, :]))
+plt.plot(np.linspace(0, 100, 100), m1[9987, :])
 #plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
 plt.ylim(-0.2, 1)
 plt.savefig('/flash/TerenzioU/program/DNA_polaron_chi0.0.png')
