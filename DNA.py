@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3D import Axes 3D
+from matplotlib import cm
 import cmath
 import sympy as sp
 import scipy.linalg as la
@@ -252,10 +254,27 @@ for i in range(998):
     print('****************************************************') 
     #print('l ki value are=', np.abs(l1[i+1,:]))
     #print('m ki value are=', m1[i+1,:])
-    #print('n ki value are=', n1[i+1,:])
-
-
-'''
+    #print('n ki value are=', n1[i+1,:])'''
+   
+    fig = plt.figure()
+    ax = plt.gca(projection='3d')
+    # Data for a three-dimensional line
+    zline = np.linspace(0.00001, .01, 997)
+    xline = np.linspace(0, 100, 100)
+    yline = np.linspace(0, 1, 100)
+    #ax.plot3D(xline, yline, zline, 'gray')
+    
+    # Data for three-dimensional scattered points
+    z = t[i]
+    x = i
+    y = np.abs(l1[i, :])
+    #ax.plot3D(xdata, ydata, zdata, 'green')
+    ax.view_init(elev=45., azim=150)
+    x, y = np.meshgrid(x, y, indexing='ij')
+    ax.plot_surface(x, y, z, rstride=1, cstride=1,cmap=cm.coolwarm, linewidth=0, antialiased=False)
+    ax.set_title('Polaron')
+    ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
+    ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')
 w1 = pd.DataFrame(l1).to_csv('/flash/TerenzioU/program/l1(100/2/0.6).csv')
 w2 = pd.DataFrame(m1).to_csv('/flash/TerenzioU/program/m1(100/2/0.6).csv')
 w3 = pd.DataFrame(n1).to_csv('/flash/TerenzioU/program/n1(100/2/0.6).csv')
