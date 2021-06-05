@@ -1,8 +1,10 @@
 import numpy as np
-from mpl_toolkits import mplot3d
+#from mpl_toolkits import mplot3d
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib import cm
 import cmath
 import sympy as sp
 import scipy.linalg as la
@@ -262,7 +264,7 @@ for i in range(1000):
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])
     fig = plt.figure()
-    ax = plt.axes(projection='3d')
+    ax = plt.gca(projection='3d')
     # Data for a three-dimensional line
     zline = np.linspace(0.00001, .01, 997)
     xline = np.linspace(0, 100, 100)
@@ -270,13 +272,16 @@ for i in range(1000):
     #ax.plot3D(xline, yline, zline, 'gray')
     
     # Data for three-dimensional scattered points
-    zdata = t[i]
-    xdata = i
-    ydata = np.abs(l1[i+1, :])
-    ax.plot3D(xdata, ydata, zdata, 'green')
-    #ax.plot_surface(xdata, ydata, zdata, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
+    z = t[i]
+    x = i
+    y = np.abs(l1[i, :])
+    #ax.plot3D(xdata, ydata, zdata, 'green')
+    ax.view_init(elev=45., azim=150)
+    x, y = np.meshgrid(x, y, indexing='ij')
+    ax.plot_surface(x, y, z, rstride=1, cstride=1,cmap=cm.coolwarm, linewidth=0, antialiased=False)
     ax.set_title('Polaron')
-    ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1);
+    ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
+    ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')
 
         #print('3=',sum(np.array(np.abs(l1))))
     #plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
