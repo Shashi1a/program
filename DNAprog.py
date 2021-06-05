@@ -33,7 +33,7 @@ def DNA(t,x,y,z):
             -0.35 * y[n] - 0.35 * y[n-1]) - 32.258064516129 * (2 * y[n] - 2 * y[n+1]) * (
                          0.01 * sp.exp(-0.35 * y[n] - 0.35 * y[n+1]) + 0.02) - 32.258064516129 * (2 * y[n] - 2 * y[n-1]) * (
                          0.01 * sp.exp(-0.35 * y[n] - 0.35 * y[n-1]) + 0.02) - 19.3548387096774 * (np.abs(x[99])**2)
-				# indentation problem
+				# indentation problem so much
 				I2 = z[n]
   			E1.append(I1)
     		E2.append(I2)
