@@ -1,12 +1,16 @@
 import numpy as np
-#from mpl_toolkits import mplot3d
+from mpl_toolkits.mplot3d import Axes 3D
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib import cm
 import cmath
 import sympy as sp
 import scipy.linalg as la
 #from numpy import linalg as la
+from ipywidgets import interactive
+
+
 
 
 #parameters   --------------------------------------------------------------------
@@ -209,31 +213,36 @@ for i in range(998):
     #print('l ki value are=', np.abs(l1[i+1,:]))
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])
-    #fig = plt.figure()
-    #ax = plt.axes(projection='3d')
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
     # Data for a three-dimensional line
-    #zline = np.linspace(0.00001, .01, 997)
-    #xline = np.linspace(0, 100, 100)
-    #yline = np.linspace(0, 1, 100)
+    zline = np.linspace(0.00001, .01, 997)
+    xline = np.linspace(0, 100, 100)
+    yline = np.linspace(0, 1, 100)
     #ax.plot3D(xline, yline, zline, 'gray')
     
     # Data for three-dimensional scattered points
-    #zdata = t[i]
-    #xdata = i
-    #ydata = np.abs(l1[i+1, :])
+    z = np.abs(l1[i+1, :])
+    x = np.arange(0,15)
+    y = np.arange(0.00001, .001)
     #ax.plot3D(xdata, ydata, zdata, 'green')
-    #ax.plot_surface(xdata, ydata, zdata, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
-    #ax.set_title('Polaron n = 15')
-    #ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
+    ax.plot_surface(x, y, z, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
+    ax.view_init(eliv = E, azim = A)
+    ax.set_title('Polaron n = 15')
+    ax.set_xlim(0, 15); ax.set_zlim(-0.1, 1)
+    iplot = interactive(plotter, E = (-90,90,5), A = (-90,90,5))
+
+     	
     #plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
     #plt.plot(np.linspace(0, 100, 100), m1[i+1, :])
     #plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
     #plt.ylim(-0.1, 1)
-fig, ax = plt.subplots()
+'''fig, ax = plt.subplots()
      #print('3=',sum(np.array(np.abs(l1))))
 plt.plot(np.linspace(0, 15, 15), np.abs(l1[997, :]))
 plt.plot(np.linspace(0, 15, 15), m1[997, :])
 #plt.plot(np.linspace(0, 15, 15), n1[i, :])
-plt.ylim(-0.4, 1)
+plt.ylim(-0.4, 1)'''
 plt.savefig('/flash/TerenzioU/program/DNAgraph_1/0.0.png')
+iplot
 
