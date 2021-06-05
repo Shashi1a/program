@@ -1,7 +1,6 @@
 import numpy as np
 from mpl_toolkits import mplot3d
 import matplotlib
-%matplotlib inline
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import cmath
@@ -235,5 +234,5 @@ for i in range(998):
     #plt.plot(np.linspace(0, 15, 15), m1[i, :])
     #plt.plot(np.linspace(0, 15, 15), n1[i, :])
     #plt.ylim(-0.4, 1)
-plt.savefig('/flash/TerenzioU/program/DNAgraph1.png')
+plt.savefig('/flash/TerenzioU/program/DNAgraph_0.6.png')
 
