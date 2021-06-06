@@ -132,9 +132,9 @@ for i in range(1000):
     ax.set_title('Polaron')
     ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
     ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')'''
-w1 = pd.DataFrame(l1).to_csv('/flash/TerenzioU/program/l1(100/0.6).csv')
-w2 = pd.DataFrame(m1).to_csv('/flash/TerenzioU/program/m1(100/0.6).csv')
-w3 = pd.DataFrame(n1).to_csv('/flash/TerenzioU/program/n1(100/0.6).csv')
+w1 = pd.DataFrame(l1).to_csv('./l1_100/0.6.csv')
+w2 = pd.DataFrame(m1).to_csv('./m1_100/0.6.csv')
+w3 = pd.DataFrame(n1).to_csv('./n1_100/0.6.csv')
 fig, ax = plt.subplots()
 plt.plot(np.linspace(0, 1, 100), np.abs(l1[998, :]))
 plt.plot(np.linspace(0, 100, 100), m1[998, :])
