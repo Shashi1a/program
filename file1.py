@@ -8,9 +8,9 @@ import cmath
 import sympy as sp
 import scipy.linalg as la
 #from numpy import linalg as la
-from ipywidgets import interactive
-import seaborn as sns
-import joypy
+#from ipywidgets import interactive
+#import seaborn as sns
+#import joypy
 #parameters   --------------------------------------------------------------------
 m=0.031; D=0.04; a=4.45; k=0.04; rho=0.5; beta=0.35; V=0.1; chi=0.6; gamma=0.005; hbar=0.00066
 n = 15
@@ -143,11 +143,9 @@ for i in range(15):
     #print('l ki value are=', np.abs(l1[i+1,:]))
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])
-   
     # Data for three-dimensional scattered points
     #def f(x, y):
       #return np.sin(np.sqrt(x ** 2 + y ** 2))
-    w = pd.DataFrame(
 
     x = np.arange(0,15)
     #z = np.arange(0,t[i])
@@ -165,7 +163,8 @@ for i in range(15):
     #ax.contour3D(X, Y, Z, 50, cmap='binary')
     #ax.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
      	
-plt.show()
+#plt.show()
+plt.savefig('/flash/TerenzioU/program/polaron_15_0.6.png')
 #iplot = interactive(plotter, E = (-90,90,5), A = (-90,90,5))
 #iplot
 
