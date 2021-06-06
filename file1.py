@@ -10,7 +10,8 @@ import scipy.linalg as la
 #from numpy import linalg as la
 #from ipywidgets import interactive
 #import seaborn as sns
-#import joypy
+import joypy
+
 #parameters   --------------------------------------------------------------------
 m=0.031; D=0.04; a=4.45; k=0.04; rho=0.5; beta=0.35; V=0.1; chi=0.6; gamma=0.005; hbar=0.00066
 n = 15
@@ -115,7 +116,7 @@ ax = fig.add_subplot(1, 1, 1, projection='3d')
 ax.set_title('Polaron')
     
 #RK4 method --------------------------------------------------------
-for i in range(15):
+for i in range(100):
     print('i=', i)
 
     a1 = DNA(t[i], l1[i, :], m1[i, :], n1[i, :])[0:15]
@@ -155,16 +156,17 @@ for i in range(15):
     #Z = f(X,Y)
     Z = X*np.exp(-X**2 - Y**2)
     #ax.set_xlim(0, 15); ax.set_zlim(-0.2, 1)
+    
     ax.plot_wireframe(X, Y, Z, color='blue')
     #X, Y1 = np.meshgrid(x,y1)
     #ax.plot_wireframe(X, Y1, Z, color= 'red')
-    #ax.invert_xaxis()
+    ax.invert_xaxis()
     ax.view_init(20, -120)
     #ax.contour3D(X, Y, Z, 50, cmap='binary')
     #ax.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
      	
 #plt.show()
-plt.savefig('/flash/TerenzioU/program/polaron_15_0.6.png')
+plt.savefig('/flash/TerenzioU/program/polaron_15_1_0.6.png')
 #iplot = interactive(plotter, E = (-90,90,5), A = (-90,90,5))
 #iplot
 
