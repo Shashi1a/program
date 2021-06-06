@@ -14,7 +14,7 @@ g = sns.FacetGrid(df1.T, aspect=15, height=0.75, palette=pal)
 # then we add the densities kdeplots for each sites
 g.map(sns.kdeplot, index , bw_adjust=1, clip_on=False, fill=True, alpha=1, linewidth=1.5)
 # here we add a white line that represents the contour of each kdeplot
-g.map(sns.kdeplot, '', bw_adjust=1, clip_on=False, color="w", lw=2)
+g.map(sns.kdeplot, index, bw_adjust=1, clip_on=False, color="w", lw=2)
 # here we add a horizontal line for each plot
 g.map(plt.axhline, y=0,lw=2, clip_on=False)
 # we loop over the FacetGrid figure axes (g.axes.flat) and add the month as text with the right color
