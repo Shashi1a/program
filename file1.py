@@ -116,7 +116,7 @@ ax = fig.add_subplot(1, 1, 1, projection='3d')
 ax.set_title('Polaron')
     
 #RK4 method --------------------------------------------------------
-for i in range(15):
+for i in range(3):
     print('i=', i)
 
     a1 = DNA(t[i], l1[i, :], m1[i, :], n1[i, :])[0:15]
@@ -165,7 +165,7 @@ for i in range(15):
     #ax.contour3D(X, Y, Z, 50, cmap='binary')
     #ax.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
 w2 = np.column_stack([l1,m1,n1])
-w1 = pd.DataFrame(w1, columns=['l1', 'm1', 'n1']).to_csv('./flash/TerenzioU/DNA_data_15_0.6.csv')
+w1 = pd.DataFrame(w1, columns=['l1', 'm1', 'n1']).to_csv('./DNA_data_15_0.6.csv')
 #plt.show()
 plt.savefig('/flash/TerenzioU/program/polaron_15_1_0.6.png')
 #vdf.append(w1)
