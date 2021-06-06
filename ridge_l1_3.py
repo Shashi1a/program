@@ -8,6 +8,7 @@ sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 print('dtype =', df1.dtypes)
+print(df1.T)
 # we generate a color palette with Seaborn.color_palette()
 pal = sns.color_palette(palette='coolwarm', n_colors=12)
 # in the sns.FacetGrid class, the 'hue' argument is the one that is the one that will be represented by colors with 'palette'
