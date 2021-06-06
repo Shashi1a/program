@@ -1,6 +1,11 @@
+import pandas as pd
 import numpy as np
+import joypy
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3D import Axes 3D
+from mpl_toolkits import mplot3d
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 from matplotlib import cm
 import cmath
 import sympy as sp
@@ -76,7 +81,8 @@ w3 = np.reshape(w3, (300,))
 #w3 = np.append(w3, t)
 w4 = w2.jacobian(w3)'''
 
-
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1, projection='3d')
 
 #Initialisation  ----------------------------------------------------
 x_0= np.zeros(100, dtype=np.complex128)
@@ -183,11 +189,11 @@ for i in range(998):
     l1[i+1, :] = l1[i, :] + (a1 + 2 * a2 + 2 * a3 + a4) * h / 6
     m1[i+1, :] = m1[i, :] + (b1 + 2 * b2 + 2 * b3 + b4) * h / 6
     n1[i+1, :] = n1[i, :] + (c1 + 2 * c2 + 2 * c3 + c4) * h / 6
-    print('3=', sum((np.abs(x) ** 2) for x in l1[i + 1, :]))
+    '''print('3=', sum((np.abs(x) ** 2) for x in l1[i + 1, :]))
     sum_square = 1/sp.sqrt(sum(np.abs(x) ** 2 for x in l1[i+1, :]))
     print('sumsquare = ', sum_square)
     print('*****************************************************************************************************') 
-    '''eig1[i] = la.eig(l1[i+1, :])
+    eig1[i] = la.eig(l1[i+1, :])
     eig2[i] = la.eig(m1[i+1, :])
     eig3[i] = la.eig(n1[i+1, :])
     total_eig[i] = eig1 + eig2 + eig3
@@ -256,39 +262,25 @@ for i in range(998):
     #print('m ki value are=', m1[i+1,:])
     #print('n ki value are=', n1[i+1,:])'''
    
-    fig = plt.figure()
-    ax = plt.gca(projection='3d')
-    # Data for a three-dimensional line
-    zline = np.linspace(0.00001, .01, 997)
-    xline = np.linspace(0, 100, 100)
-    yline = np.linspace(0, 1, 100)
-    #ax.plot3D(xline, yline, zline, 'gray')
-    
-    # Data for three-dimensional scattered points
-    z = t[i]
-    x = i
+    #saving data in database and plotting 
+    x = np.arange(0,100)
     y = np.abs(l1[i, :])
-    #ax.plot3D(xdata, ydata, zdata, 'green')
-    ax.view_init(elev=45., azim=150)
-    x, y = np.meshgrid(x, y, indexing='ij')
-    ax.plot_surface(x, y, z, rstride=1, cstride=1,cmap=cm.coolwarm, linewidth=0, antialiased=False)
+    X, Y = np.meshgrid(x,y)
+    Z = X*np.exp(-X**2 - Y**2)
+    #ax.set_xlim(0, 15); ax.set_zlim(-0.2, 1)
     ax.set_title('Polaron')
-    ax.set_xlim(0, 100); ax.set_ylim(-0.1, 1)
-    ax.set_xlabel('n'); ax.set_ylabel('|x_{n}|'); ax.set_zlabel('t')
-w1 = pd.DataFrame(l1).to_csv('/flash/TerenzioU/program/l1(100/2/0.6).csv')
-w2 = pd.DataFrame(m1).to_csv('/flash/TerenzioU/program/m1(100/2/0.6).csv')
-w3 = pd.DataFrame(n1).to_csv('/flash/TerenzioU/program/n1(100/2/0.6).csv')
-fig, ax = plt.subplots()
-plt.plot(np.linspace(0, 100, 100), np.abs(l1[997, :]))
-plt.plot(np.linspace(0, 100, 100), m1[997, :])
+    ax.set_xlabel('time'); ax.set_ylabel('n'); ax.set_zlabel('$|/psi_{n}|$')
+    ax.plot_wireframe(X, Y, Z, color='green')
+    ax.invert_xaxis()
+    ax.view_init(20, -120)
+    #ax.contour3D(X, Y, Z, 50, cmap='binary')
+    #ax.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap='viridis', edgecolor='none')
+
+w1 = pd.DataFrame(l1).to_csv('./l1_100/0.0.csv')
+w2 = pd.DataFrame(m1).to_csv('./m1_100/0.0.csv')
+w3 = pd.DataFrame(n1).to_csv('./n1_100/0.0.csv')
+#plt.plot(np.linspace(0, 100, 100), np.abs(l1[998, :]))
+#plt.plot(np.linspace(0, 100, 100), m1[998, :])
 #plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
-plt.ylim(-0.2, 1)
-plt.savefig('/flash/TerenzioU/program/DNA_polaron_chi/2/0.6.png')
-
-        #print('3=',sum(np.array(np.abs(l1))))
-    #plt.plot(np.linspace(0, 100, 100), np.abs(l1[i+1, :]))
-    #plt.plot(np.linspace(0, 100, 100), m1[i+1, :])
-    #plt.plot(np.linspace(0, 100, 100), n1[i+1, :])
-    #plt.ylim(-0.1, 1)
-#plt.show()
-
+#plt.ylim(-0.4, 1)
+plt.savefig('/flash/TerenzioU/program/DNA_polaron100_chi0.0.png')
