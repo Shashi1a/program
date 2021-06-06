@@ -6,10 +6,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 #set some display options
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-#import the csv
 df2 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 #create a color gradent function to be used in the colormap parameter
 def color_gradient(x=0.0, start=(0, 0, 0), stop=(1, 1, 1)):
@@ -20,29 +16,12 @@ def color_gradient(x=0.0, start=(0, 0, 0), stop=(1, 1, 1)):
 #show the table
 print(df2.head(3))
 #plot the figure
-plt.figure(dpi=380)
-fig, axes = joypy.joyplot(df2
-                          , overlap=2.5
-                          , ylim='own'
-                          , x_range=(0,60)
-                          , fill=True
-                          , figsize=(10,13)
-                          , legend=False
-                          , xlabels=True
-                          , ylabels=True
-                          #, color=['#76a5af', '#134f5c']
-                          , colormap=lambda x: color_gradient(x, start=(.08, .45, .8)
-                                                             ,stop=(.8, .34, .44))
-                          , alpha=0.6
-                          , linewidth=.5
-                          , linecolor='w'
-                          #, background='k' # change to 'k' for black background or 'grey' for grey
-                          , fade=True)
+plt.figure()
+fig, axes = joypy.joyplot(df2)
 plt.title('Joy Plot of Polaron'
-          , fontsize=14
-          , color='blue'
-          , alpha=1)
+          , fontsize=8
+          , color='blue')
 plt.rc("font", size=12)
-plt.xlabel('sites', fontsize=14, color='blue', alpha=1)
-plt.ylabel('time', fontsize=8, color='blue', alpha=1)
+plt.xlabel('sites', fontsize=8, color='blue')
+plt.ylabel('time', fontsize=8, color='blue')
 plt.savefig('/flash/TerenzioU/program/DNA_15_0.6_1.png')
