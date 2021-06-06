@@ -23,7 +23,6 @@ print(df2.head(3))
 plt.figure(dpi=380)
 fig, axes = joypy.joyplot(df2
                           , overlap=2.5
-                          , by="index"
                           , ylim='own'
                           , x_range=(0,60)
                           , fill=True
