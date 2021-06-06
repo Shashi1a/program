@@ -20,8 +20,8 @@ plt.figure()
 fig, axes = joypy.joyplot(df2)
 plt.title('Joy Plot of Polaron'
           , fontsize=8
-          , color='blue')
+          , color='green')
 plt.rc("font", size=12)
 plt.xlabel('sites', fontsize=8, color='blue')
 plt.ylabel('time', fontsize=8, color='blue')
-plt.savefig('/flash/TerenzioU/program/DNA_15_0.6_1.png')
+plt.savefig('/flash/TerenzioU/program/DNA_15_0.6_2.png')
