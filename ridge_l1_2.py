@@ -24,4 +24,4 @@ plt.title('Polaron wave function'
 plt.rc("font", size=6)
 plt.xlabel('sites', fontsize=6, color='blue')
 plt.ylabel('time', fontsize=6, color='blue')
-plt.savefig('/flash/TerenzioU/program/DNA_15_0.6_2.png')
+plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
