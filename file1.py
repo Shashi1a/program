@@ -117,7 +117,7 @@ ax = fig.add_subplot(1, 1, 1, projection='3d')
 ax.set_title('Polaron')
     
 #RK4 method --------------------------------------------------------
-for i in range(3):
+for i in range(100):
     print('i=', i)
 
     a1 = DNA(t[i], l1[i, :], m1[i, :], n1[i, :])[0:15]
@@ -169,7 +169,7 @@ for i in range(3):
 w1 = pd.DataFrame(l1).to_csv('./DNA_l1_15_0.6.csv')
 w2 = pd.DataFrame(m1).to_csv('./DNA_m1_15_0.6.csv')
 #plt.show()
-plt.savefig('/flash/TerenzioU/program/polaron_15_1_0.6.png')
+plt.savefig('/flash/TerenzioU/program/polaron_15_2_0.6.png')
 #vdf.append(w1)
 #fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
 
