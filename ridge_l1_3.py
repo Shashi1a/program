@@ -8,7 +8,7 @@ sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 df = df1.T
-df = df.apply(pd.np.absolute)
+df = df.abs()
 df = df.apply(pd.to_numeric) 
 print('dtype =', df.dtypes)
 print(df)
