@@ -258,9 +258,9 @@ z4 = pd.DataFrame(im_p1, columns=['IMF_p3']).to_csv('./IMF_p3', index=false, hea
 z5 = pd.DataFrame(im_p3, columns=['im_p3']).to_csv('./pixelclass', index=false, header=True)
 z = pd.DataFrame(im_gray_avg).to_csv('/flash/TerenzioU/program/im_gray_avg1.csv')
 v = np.column_stack([im, sp_id, sp_centx, sp_centy, sp_width, sp_height, im_area, im_gray_avg, im_eccentricity])
-df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity'])
-vdf.append(df)
-fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
+df = pd.DataFrame(v, columns=['Img no', 'sp_id', 'cent_X', 'cent_Y', 'width', 'height', 'area', 'grayavg', 'eccentricity']).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
+#vdf.append(df)
+#fdf = pd.concat(vdf).to_csv('/flash/TerenzioU/program/im_sp_data1.csv', sep=',', index=False, header=True)
 
 #os.chdir("imgdir")
 extension = 'csv'
