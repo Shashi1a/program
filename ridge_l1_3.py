@@ -12,7 +12,7 @@ sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 
-print(df1.T(100))
+#print(df1.T(100))
 
 # we generate a color palette with Seaborn.color_palette()
 pal = sns.color_palette(palette='coolwarm', n_colors=12)
