@@ -16,9 +16,37 @@ df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', '
 #df = df.abs()
 #df = df.apply(pd.to_numeric) 
 print('dtype =', df1.dtypes)
-print(df1)
+#print(df1)
+# Let's grab only the subset of columns displayed in the example
+column_names = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14']
+df1 = df1[column_names]
+
+# Not only does 'ridgeplot(...)' come configured with sensible defaults
+# but is also fully configurable to your own style and preference!
+fig = ridgeplot(
+    samples=df1.values.T,
+    bandwidth=4,
+    kde_points=np.linspace(-12.5, 112.5, 400),
+    colorscale="viridis",
+    colormode="index",
+    coloralpha=0.6,
+    labels=column_names,
+    spacing=5 / 9,
+)
+
+# Again, update the figure layout to your liking here
+fig.update_layout(
+    title="What probability would you assign to the phrase <i>“Highly likely”</i>?",
+    height=650,
+    width=800,
+    plot_bgcolor="rgba(255, 255, 255, 0.0)",
+    xaxis_gridcolor="rgba(0, 0, 0, 0.1)",
+    yaxis_gridcolor="rgba(0, 0, 0, 0.1)",
+    yaxis_title="Assigned Probability (%)",
+)
+#fig.show()
 # we generate a color palette with Seaborn.color_palette()
-pal = sns.color_palette(palette='coolwarm', n_colors=12)
+'''pal = sns.color_palette(palette='coolwarm', n_colors=12)
 # in the sns.FacetGrid class, the 'hue' argument is the one that is the one that will be represented by colors with 'palette'
 g = sns.FacetGrid(df1, aspect=15, height=0.75, palette=pal)
 n = np.arange(0,100)
@@ -48,4 +76,5 @@ g.despine(bottom=True, left=True)
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
+'''
 plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
