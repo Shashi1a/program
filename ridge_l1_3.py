@@ -16,6 +16,7 @@ df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', '
 #print(df1.['Unnamed: 1'])
 #df = df1.T
 #df = df.abs()
+#plotting ridgeplot
 #df = df.apply(pd.to_numeric) 
 print('dtype =', df1.dtypes)
 #print(df1)
