@@ -1,15 +1,16 @@
 # getting necessary libraries
-from mpl_toolkits.mplot3d.axes3d import Axes3D; import pandas as pd; import joypy; import numpy as np
+from mpl_toolkits.mplot3d.axes3d import Axes3D
+import pandas as pd
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
-from ridgeplot import ridgeplot
 
 sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
-df1.rename( columns={'Unnamed: 0':'site'}, inplace=True )
+#df1.rename( columns={'Unnamed: 0':'site'}, inplace=True )
 df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14']
 #print(df1)
 #df1.['Unnamed: 1'] = (df1.['Unnamed: 1']).applymap(np.absolute)
@@ -21,35 +22,8 @@ df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', '
 print('dtype =', df1.dtypes)
 #print(df1)
 
-# Initialize the FacetGrid object
-pal = sns.cubehelix_palette(len(df1.label.unique()), rot=-.25, light=.7)
-g = sns.FacetGrid(df1, row="sites", hue="sites", aspect=15, height=.5, palette=pal)
 
-# Draw the densities in a few steps
-g.map(sns.kdeplot, "sites", bw_adjust=.5, clip_on=False, fill=True, alpha=1, linewidth=1.5)
-g.map(sns.kdeplot, "sites", clip_on=False, color="w", lw=2, bw_adjust=.5)
-g.map(plt.axhline, y=0, lw=2, clip_on=False)
-
-# Define and use a simple function to label the plot in axes coordinates
-def label(x, color, label):
-    ax = plt.gca()
-    ax.text(0, .2, label, fontweight="bold", color=color, ha="left", va="center", transform=ax.transAxes)
-
-g.map(label, "sites")
-
-# Set the subplots to overlap
-g.fig.subplots_adjust(hspace=-.25)
-
-# Remove axes details that don't play well with overlap
-g.set_titles("")
-g.set(yticks=[])
-g.despine(bottom=True, left=True)
-
-# uncomment the following line if there's a tight layout warning
-# g.fig.tight_layout()
-
-
-'''# we generate a color palette with Seaborn.color_palette()
+# we generate a color palette with Seaborn.color_palette()
 pal = sns.color_palette(palette='coolwarm', n_colors=12)
 # in the sns.FacetGrid class, the 'hue' argument is the one that is the one that will be represented by colors with 'palette'
 g = sns.FacetGrid(df1, aspect=15, height=0.75, palette=pal)
@@ -80,5 +54,4 @@ g.despine(bottom=True, left=True)
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
-'''
 plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
