@@ -8,7 +8,7 @@ sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 df1.rename( columns={'Unnamed: 0':'site'}, inplace=True )
-df1.columns = [ 'sites', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14']
+df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14']
 print(df1)
 #df1.['Unnamed: 1'] = (df1.['Unnamed: 1']).applymap(np.absolute)
 #print(df1.['Unnamed: 1'])
