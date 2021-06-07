@@ -80,4 +80,5 @@ g.despine(bottom=True, left=True)
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
-'''plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
+'''
+plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
