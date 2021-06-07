@@ -31,14 +31,20 @@ g.map(plt.axhline, y=0,lw=2, clip_on=False)
 # we loop over the FacetGrid figure axes (g.axes.flat) and add the month as text with the right color
 # notice how ax.lines[-1].get_color() enables you to access the last line's color in each matplotlib.Axes
 #for i, ax in enumerate(g.axes.flat):
- #   ax.text(-15, 0.02, month_dict[i+1],fontweight='bold', fontsize=15,color=ax.lines[-1].get_color())
+    #ax.text(-15, 0.02, month_dict[i+1],fontweight='bold', fontsize=15,color=ax.lines[-1].get_color())
+ # Define and use a simple function to label the plot in axes coordinates
+def label(x, color, label):
+    ax = plt.gca()
+    ax.text(0, .2, label, fontweight="bold", color=color,
+            ha="left", va="center", transform=ax.transAxes)
+g.map(label, 'sites')
 # we use matplotlib.Figure.subplots_adjust() function to get the subplots to overlap
 g.fig.subplots_adjust(hspace=-0.3)
 # eventually we remove axes titles, yticks and spines
 g.set_titles("Polaron")
 g.set(yticks=[])
 g.despine(bottom=True, left=True)
-plt.setp(ax.get_xticklabels(), fontsize=15, fontweight='bold')
+#plt.setp(ax.get_xticklabels(), fontsize=15, fontweight='bold')
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
