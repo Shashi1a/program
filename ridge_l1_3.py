@@ -20,36 +20,37 @@ df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', '
 #df = df.apply(pd.to_numeric) 
 print('dtype =', df1.dtypes)
 #print(df1)
-# Let's grab only the subset of columns displayed in the example
-column_names = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14']
-df1 = df1[column_names]
 
-# Not only does 'ridgeplot(...)' come configured with sensible defaults
-# but is also fully configurable to your own style and preference!
-fig = ridgeplot(
-    samples=df1.values.T,
-    bandwidth=4,
-    kde_points=np.linspace(-12.5, 112.5, 400),
-    colorscale="viridis",
-    colormode="index",
-    coloralpha=0.6,
-    labels=column_names,
-    spacing=5 / 9,
-)
+# Initialize the FacetGrid object
+pal = sns.cubehelix_palette(len(df1.label.unique()), rot=-.25, light=.7)
+g = sns.FacetGrid(df1, row="sites", hue="sites", aspect=15, height=.5, palette=pal)
 
-# Again, update the figure layout to your liking here
-fig.update_layout(
-    title="What probability would you assign to the phrase <i>“Highly likely”</i>?",
-    height=650,
-    width=800,
-    plot_bgcolor="rgba(255, 255, 255, 0.0)",
-    xaxis_gridcolor="rgba(0, 0, 0, 0.1)",
-    yaxis_gridcolor="rgba(0, 0, 0, 0.1)",
-    yaxis_title="Assigned Probability (%)",
-)
-#fig.show()
-# we generate a color palette with Seaborn.color_palette()
-'''pal = sns.color_palette(palette='coolwarm', n_colors=12)
+# Draw the densities in a few steps
+g.map(sns.kdeplot, "sites", bw_adjust=.5, clip_on=False, fill=True, alpha=1, linewidth=1.5)
+g.map(sns.kdeplot, "sites", clip_on=False, color="w", lw=2, bw_adjust=.5)
+g.map(plt.axhline, y=0, lw=2, clip_on=False)
+
+# Define and use a simple function to label the plot in axes coordinates
+def label(x, color, label):
+    ax = plt.gca()
+    ax.text(0, .2, label, fontweight="bold", color=color, ha="left", va="center", transform=ax.transAxes)
+
+g.map(label, "sites")
+
+# Set the subplots to overlap
+g.fig.subplots_adjust(hspace=-.25)
+
+# Remove axes details that don't play well with overlap
+g.set_titles("")
+g.set(yticks=[])
+g.despine(bottom=True, left=True)
+
+# uncomment the following line if there's a tight layout warning
+# g.fig.tight_layout()
+
+
+'''# we generate a color palette with Seaborn.color_palette()
+pal = sns.color_palette(palette='coolwarm', n_colors=12)
 # in the sns.FacetGrid class, the 'hue' argument is the one that is the one that will be represented by colors with 'palette'
 g = sns.FacetGrid(df1, aspect=15, height=0.75, palette=pal)
 n = np.arange(0,100)
@@ -79,5 +80,4 @@ g.despine(bottom=True, left=True)
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
-'''
-plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
+'''plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
