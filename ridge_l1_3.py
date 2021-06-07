@@ -7,8 +7,8 @@ import seaborn as sns
 sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
-df1.1 = np.abs(df1.1)
-print(df1.1)
+df1.['1'] = (df1.['1']).applymap(np.absolute)
+print(df1.['1'])
 df = df1.T
 df = df.abs()
 df = df.apply(pd.to_numeric) 
