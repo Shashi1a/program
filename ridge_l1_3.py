@@ -1,5 +1,4 @@
 # getting necessary libraries
-from mpl_toolkits.mplot3d.axes3d import Axes3D
 import pandas as pd
 import numpy as np
 import matplotlib
