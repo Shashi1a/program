@@ -22,7 +22,12 @@ df1.columns = [ 'sites', 'n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', '
 print('dtype =', df1.dtypes)
 #print(df1)
 
+for i in df1.columns:
+  pal = sns.color_palette(palette='coolwarm', n_colors=12)
+  g = sns.FacetGrid(df1, aspect = 6, height= 9, palette=pal)
+  g.map(sns.kdeplot, i, bw_adjust=1, clip_on=False, fill=True, alpha=1, linewidth=1.5) 
 
+'''
 # we generate a color palette with Seaborn.color_palette()
 pal = sns.color_palette(palette='coolwarm', n_colors=12)
 # in the sns.FacetGrid class, the 'hue' argument is the one that is the one that will be represented by colors with 'palette'
@@ -54,4 +59,5 @@ g.despine(bottom=True, left=True)
 #g.map(label, "sites")
 plt.xlabel('lattice sites', fontweight='bold', fontsize=15)
 #g.fig.suptitle('Polaron',ha='right',fontsize=20,fontweight=20).    #plt.show()
+'''
 plt.savefig('/flash/TerenzioU/program/DNA_100_0.0_2.png')
