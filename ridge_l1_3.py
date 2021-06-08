@@ -6,8 +6,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn import preprocessing
 
-sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
+#sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 # getting the data
 df1 = pd.read_csv('/flash/TerenzioU/DNA_l1_15_0.6.csv')
 #df1.rename( columns={'Unnamed: 0':'site'}, inplace=True )
